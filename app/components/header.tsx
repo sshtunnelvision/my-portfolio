@@ -1,8 +1,8 @@
 const Header = () => {
   return (
-    <header className="py-4 px-6">
-      <h1 className="text-2xl font-bold">My Portfolio</h1>
-    </header>
+    <div className="flex items-center justify-center ">
+      <h1 className="text-3xl font-extrabold text-gray-800">My Portfolio</h1>
+    </div>
   );
 };
 
