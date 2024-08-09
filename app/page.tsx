@@ -5,7 +5,7 @@ import Projects from "./components/projects";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col p-16">
+    <main className="flex min-h-screen flex-col px-60 pt-4">
       <Navbar />
       <Header />
       <About />
