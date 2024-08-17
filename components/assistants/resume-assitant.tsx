@@ -1,7 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Send, Bot, GripVertical } from "lucide-react";
+import { Send, Bot, Download } from "lucide-react";
+
+export interface AssistantProps {
+  threadId: string | null;
+  createThread: () => Promise<void>;
+}
 
 interface ResumeSection {
   section_name: string;
@@ -19,58 +24,18 @@ interface Message {
   content: string | AssistantResponse;
 }
 
-const PortfolioAssistant: React.FC = () => {
+const ResumeAssistant: React.FC = () => {
   const [threadId, setThreadId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
-  const [height, setHeight] = useState(300);
-  const resizeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     createThread();
   }, []);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (resizeRef.current) {
-        const newHeight = window.innerHeight - e.clientY;
-        setHeight(Math.max(200, Math.min(newHeight, window.innerHeight - 100)));
-      }
-    };
-
-    const handleMouseUp = () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-
-    const handleMouseDown = () => {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-    };
-
-    const resizeHandle = resizeRef.current;
-    if (resizeHandle) {
-      resizeHandle.addEventListener("mousedown", handleMouseDown);
-    }
-
-    return () => {
-      if (resizeHandle) {
-        resizeHandle.removeEventListener("mousedown", handleMouseDown);
-      }
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, []);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  useEffect(() => {}, [messages]);
 
   const createThread = async () => {
     const response = await fetch("/api/portfolio-assistant", {
@@ -231,11 +196,25 @@ const PortfolioAssistant: React.FC = () => {
     );
   };
 
+  const handleDownloadResume = () => {
+    const resumeUrl = "/Arek_Halpern_Resume_2024.pdf";
+    window.open(resumeUrl, "_blank");
+  };
+
   return (
     <div className="flex flex-col h-[calc(80vh-2rem)] bg-gray-950 text-gray-200 border border-gray-800 rounded-lg">
-      <div className="flex items-center p-3 border-b border-gray-800">
-        <Bot className="w-5 h-5 mr-2" />
-        <span className="text-sm font-medium">Resume Assistant</span>
+      <div className="flex items-center justify-between p-3 border-b border-gray-800">
+        <div className="flex items-center flex-grow">
+          <Bot className="w-5 h-5 mr-2" />
+          <span className="text-sm font-medium">Resume Assistant</span>
+        </div>
+        <button
+          onClick={handleDownloadResume}
+          className="flex items-center text-xs bg-gray-700 text-gray-200 px-3 py-1 rounded-full hover:bg-gray-600 transition-colors ml-2"
+        >
+          <Download className="w-4 h-4 mr-1" />
+          Download Resume
+        </button>
       </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, index) => (
@@ -280,7 +259,7 @@ const PortfolioAssistant: React.FC = () => {
           />
           <button
             type="submit"
-            className="border border-orange-600 text-gray-200 p-2 rounded-r-md hover:bg-gray-700 transition-colors"
+            className="border border-gray-600 text-gray-200 p-2 rounded-r-md hover:bg-gray-700 transition-colors"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -295,4 +274,4 @@ const PortfolioAssistant: React.FC = () => {
   );
 };
 
-export default PortfolioAssistant;
+export default ResumeAssistant;
