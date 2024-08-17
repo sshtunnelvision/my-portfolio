@@ -1,4 +1,5 @@
 import About from "./components/about";
+import Assistant from "./components/assistant";
 import Header from "./components/header";
 import Navbar from "./components/navbar";
 import Projects from "./components/projects";
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <About />
       <Projects />
+      <Assistant />
     </main>
   );
 }
