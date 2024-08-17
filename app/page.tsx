@@ -9,7 +9,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col px-4 sm:px-6 md:px-8 lg:px-12 pt-4">
       <Navbar />
       <Header />
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-8xl mx-auto">
         <Assistant />
       </div>
     </main>

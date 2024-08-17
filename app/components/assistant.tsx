@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Send, Bot, GripVertical, Proportions } from "lucide-react";
+import { Send, Bot, GripVertical } from "lucide-react";
 
 interface ResumeSection {
   section_name: string;
@@ -232,19 +232,10 @@ const PortfolioAssistant: React.FC = () => {
   };
 
   return (
-    <div
-      className="flex flex-col bg-gray-950 text-gray-200 border border-gray-800 rounded-lg"
-      style={{ height: `${height}px` }}
-    >
-      <div
-        ref={resizeRef}
-        className="cursor-row-resize flex justify-center items-center h-6 bg-gray-800 hover:bg-gray-700 transition-colors"
-      >
-        <GripVertical className="w-4 h-4" />
-      </div>
+    <div className="flex flex-col h-[calc(80vh-2rem)] bg-gray-950 text-gray-200 border border-gray-800 rounded-lg">
       <div className="flex items-center p-3 border-b border-gray-800">
         <Bot className="w-5 h-5 mr-2" />
-        <span className="text-sm font-medium">Portfolio Assistant</span>
+        <span className="text-sm font-medium">Resume Assistant</span>
       </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, index) => (
@@ -289,7 +280,7 @@ const PortfolioAssistant: React.FC = () => {
           />
           <button
             type="submit"
-            className="bg-gray-800 text-gray-200 p-2 rounded-r-md hover:bg-gray-700 transition-colors"
+            className="border border-orange-600 text-gray-200 p-2 rounded-r-md hover:bg-gray-700 transition-colors"
             disabled={isLoading}
           >
             {isLoading ? (
