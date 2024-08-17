@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -26,15 +26,6 @@ export async function POST(request: Request) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ thread_id: threadId, message }),
-        });
-        break;
-
-      case 'get_messages':
-        if (!threadId) {
-          return NextResponse.json({ error: 'Missing threadId' }, { status: 400 });
-        }
-        response = await fetch(`${API_URL}/api/v1/portfolio-assistant/get_messages?thread_id=${threadId}`, {
-          method: 'GET',
         });
         break;
 
