@@ -4,6 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 import Navbar from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,14 +24,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(
-          "min-h-screen bg-gray-950 text-gray-200 font-sans antialiased",
-          fontSans.variable
-        )}
+        className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
       >
-        <Header />
-        <Navbar />
-        <main>{children}</main>
+        <ThemeProvider>
+          <div className="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-200 min-h-screen">
+            <Header />
+            <Navbar />
+            <main>{children}</main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
