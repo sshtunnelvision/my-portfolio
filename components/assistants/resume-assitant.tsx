@@ -64,6 +64,9 @@ const ResumeAssistant: React.FC = () => {
     setInput("");
 
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds timeout
+
       const response = await fetch("/api/portfolio-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,7 +75,10 @@ const ResumeAssistant: React.FC = () => {
           threadId,
           message: messageText,
         }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
