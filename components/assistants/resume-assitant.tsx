@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Send, Bot, Download } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface AssistantProps {
   threadId: string | null;
@@ -17,6 +20,7 @@ interface AssistantResponse {
   main_response: string;
   relevant_sections: ResumeSection[];
   follow_up_questions: string[];
+  dashboard_data: any;
 }
 
 interface Message {
@@ -30,6 +34,11 @@ const ResumeAssistant: React.FC = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
+
+  const suggestedQuestions = [
+    "Load Resume Dashboard",
+    // Add more suggested questions here
+  ];
 
   useEffect(() => {
     createThread();
@@ -108,8 +117,11 @@ const ResumeAssistant: React.FC = () => {
     }
   };
 
-  const capitalizeFirstLetter = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  const formatKey = (key: string): string => {
+    return key
+      .split(/(?=[A-Z])/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
 
   const renderContent = (content: any): React.ReactNode => {
@@ -125,7 +137,7 @@ const ResumeAssistant: React.FC = () => {
                   {Object.entries(item).map(([key, value], i) => (
                     <div key={i} className="mb-2">
                       <span className="font-medium text-gray-300">
-                        {capitalizeFirstLetter(key)}:{" "}
+                        {formatKey(key)}:{" "}
                       </span>
                       {renderContent(value)}
                     </div>
@@ -144,7 +156,7 @@ const ResumeAssistant: React.FC = () => {
           {Object.entries(content).map(([key, value], index) => (
             <div key={index} className="mb-4">
               <h4 className="font-semibold text-gray-200 mb-2">
-                {capitalizeFirstLetter(key)}
+                {formatKey(key)}
               </h4>
               <div className="ml-4">{renderContent(value)}</div>
             </div>
@@ -155,6 +167,141 @@ const ResumeAssistant: React.FC = () => {
     return <p className="mb-2">{String(content)}</p>;
   };
 
+  const renderDashboardData = (dashboardData: any) => {
+    if (isLoading) {
+      return (
+        <Card className="w-full bg-gray-800 text-gray-200">
+          <CardHeader>
+            <CardTitle>Portfolio Dashboard</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Tabs defaultValue="education" className="w-full">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="education">Education</TabsTrigger>
+                <TabsTrigger value="experience">Experience</TabsTrigger>
+                <TabsTrigger value="projects">Projects</TabsTrigger>
+                <TabsTrigger value="skills">Skills</TabsTrigger>
+              </TabsList>
+              {["education", "experience", "projects", "skills"].map((tab) => (
+                <TabsContent key={tab} value={tab}>
+                  <Card>
+                    <CardHeader>
+                      <Skeleton className="h-6 w-[150px]" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {[...Array(3)].map((_, index) => (
+                          <div key={index} className="space-y-2">
+                            <Skeleton className="h-4 w-[200px]" />
+                            <Skeleton className="h-3 w-full" />
+                            <Skeleton className="h-3 w-full" />
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    return (
+      <Card className="w-full bg-gray-800 text-gray-200">
+        <CardHeader>
+          <CardTitle>Resume Dashboard</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="education" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="education">Education</TabsTrigger>
+              <TabsTrigger value="experience">Experience</TabsTrigger>
+              <TabsTrigger value="projects">Projects</TabsTrigger>
+              <TabsTrigger value="skills">Skills</TabsTrigger>
+            </TabsList>
+            <TabsContent value="education">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Education</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {dashboardData.education.map((edu: any, index: number) => (
+                    <div key={index} className="mb-4">
+                      <h4 className="font-semibold">{edu.degree}</h4>
+                      <p>{edu.institution}</p>
+                      <p>{edu.year}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="experience">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Experience</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {dashboardData.experience.length > 0 ? (
+                    dashboardData.experience.map((exp: any, index: number) => (
+                      <div key={index} className="mb-4">
+                        <h4 className="font-semibold">{exp.title}</h4>
+                        <p>{exp.company}</p>
+                        <p>{exp.duration}</p>
+                        <p className="whitespace-pre-line">{exp.description}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No experience data available.</p>
+                  )}
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="projects">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Projects</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {dashboardData.projects.map((project: any, index: number) => (
+                    <div key={index} className="mb-4">
+                      <h4 className="font-semibold">
+                        {project.name || `Project ${index + 1}`}
+                      </h4>
+                      <p className="whitespace-pre-line">
+                        {project.description}
+                      </p>
+                      {project.technologies &&
+                        project.technologies.length > 0 && (
+                          <p>Technologies: {project.technologies.join(", ")}</p>
+                        )}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="skills">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Skills</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {dashboardData.skills.map((skill: any, index: number) => (
+                    <div key={index} className="mb-4">
+                      <h4 className="font-semibold">{skill.category}</h4>
+                      <p>{skill.description}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
+    );
+  };
+
   const renderAssistantResponse = (content: string | AssistantResponse) => {
     if (typeof content === "string") {
       return <p>{content}</p>;
@@ -163,19 +310,9 @@ const ResumeAssistant: React.FC = () => {
     return (
       <div className="space-y-4">
         <div>{content.main_response}</div>
-        {content.relevant_sections && content.relevant_sections.length > 0 && (
-          <div className="mt-4 text-sm text-gray-400">
-            <h3 className="font-semibold text-gray-200 mb-2">
-              Relevant Sections:
-            </h3>
-            {content.relevant_sections.map((section, index) => (
-              <div key={index} className="mb-6 bg-gray-800 p-4 rounded-lg">
-                <h4 className="font-medium text-gray-200 mb-2">
-                  {section.section_name}
-                </h4>
-                <div className="ml-4">{renderContent(section.content)}</div>
-              </div>
-            ))}
+        {(isLoading || content.dashboard_data) && (
+          <div className="mt-4">
+            {renderDashboardData(content.dashboard_data)}
           </div>
         )}
         {content.follow_up_questions &&
@@ -217,6 +354,22 @@ const ResumeAssistant: React.FC = () => {
         </button>
       </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.length === 0 && (
+          <div className="flex flex-col items-center justify-center h-full">
+            <p className="text-gray-400 mb-4">How can I assist you today?</p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {suggestedQuestions.map((question, index) => (
+                <button
+                  key={index}
+                  onClick={() => sendMessage(question)}
+                  className="text-sm bg-gray-700 text-gray-200 px-3 py-2 rounded-full hover:bg-gray-600 transition-colors"
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -239,6 +392,19 @@ const ResumeAssistant: React.FC = () => {
             </div>
           </div>
         ))}
+        {isLoading && (
+          <div className="flex justify-start w-full">
+            <div className="w-full p-2 rounded-lg bg-gray-900 text-gray-200">
+              <Skeleton className="h-4 w-3/4 mb-2" />
+              <Skeleton className="h-20 w-full" />
+              <div className="mt-4 space-y-2">
+                <Skeleton className="h-4 w-1/2" />
+                <Skeleton className="h-4 w-2/3" />
+                <Skeleton className="h-4 w-3/5" />
+              </div>
+            </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
       <form
