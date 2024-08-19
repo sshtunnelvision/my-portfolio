@@ -67,7 +67,7 @@ const ResumeAssistant: React.FC = () => {
     ]);
     setInput("");
 
-    console.log("Sending message:", messageText); // Add this line
+    // console.log("Sending message:", messageText);
 
     try {
       abortControllerRef.current = new AbortController();
@@ -82,7 +82,7 @@ const ResumeAssistant: React.FC = () => {
         signal: abortControllerRef.current.signal,
       });
 
-      console.log("Response status:", response.status); // Add this line
+      // console.log("Response status:", response.status);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -99,7 +99,7 @@ const ResumeAssistant: React.FC = () => {
         if (done) break;
 
         const chunk = new TextDecoder().decode(value);
-        console.log("Received chunk:", chunk); // Add this line
+        // console.log("Received chunk:", chunk);
         partialResponse += chunk;
 
         // Split the partial response by newline characters
@@ -109,11 +109,11 @@ const ResumeAssistant: React.FC = () => {
         for (let i = 0; i < jsonStrings.length - 1; i++) {
           try {
             const parsedChunk = JSON.parse(jsonStrings[i]);
-            console.log("Parsed chunk:", parsedChunk);
+            // console.log("Parsed chunk:", parsedChunk);
             if (parsedChunk.status && parsedChunk.status !== "completed") {
-              console.log("Status update:", parsedChunk.status);
+              // console.log("Status update:", parsedChunk.status);
             } else if (parsedChunk.main_response) {
-              console.log("Updating messages with:", parsedChunk); // Add this line
+              // console.log("Updating messages with:", parsedChunk);
               setMessages((prevMessages) => [
                 ...prevMessages,
                 { role: "assistant", content: parsedChunk },
@@ -131,7 +131,7 @@ const ResumeAssistant: React.FC = () => {
       console.error("Error in sendMessage:", error); // Modify this line
       if (error instanceof Error) {
         if (error.name === "AbortError") {
-          console.log("Fetch aborted");
+          // console.log("Fetch aborted");
         } else {
           console.error("Error sending message:", error.message);
           setMessages((prevMessages) => [
@@ -373,7 +373,7 @@ const ResumeAssistant: React.FC = () => {
   };
 
   const handleSuggestedQuestion = (question: string) => {
-    console.log("Handling suggested question:", question);
+    // console.log("Handling suggested question:", question);
     sendMessage(question);
   };
 
@@ -390,7 +390,7 @@ const ResumeAssistant: React.FC = () => {
       <div className="flex items-center justify-between p-3 border-b border-gray-800">
         <div className="flex items-center flex-grow">
           <Bot className="w-5 h-5 mr-2" />
-          <span className="text-sm font-medium">Resume Assistant</span>
+          <span className="text-sm font-medium">Arek&apos;s Assistant</span>
         </div>
         <button
           onClick={handleDownloadResume}
