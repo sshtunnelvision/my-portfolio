@@ -34,6 +34,7 @@ const ResumeAssistant: React.FC = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const suggestedQuestions = [
     "Load Resume Dashboard",
@@ -60,13 +61,16 @@ const ResumeAssistant: React.FC = () => {
     if (!threadId || !messageText) return;
 
     setIsLoading(true);
-    setMessages([...messages, { role: "user", content: messageText }]);
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { role: "user", content: messageText },
+    ]);
     setInput("");
 
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 seconds timeout
+    console.log("Sending message:", messageText); // Add this line
 
+    try {
+      abortControllerRef.current = new AbortController();
       const response = await fetch("/api/portfolio-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,51 +79,75 @@ const ResumeAssistant: React.FC = () => {
           threadId,
           message: messageText,
         }),
-        signal: controller.signal,
+        signal: abortControllerRef.current.signal,
       });
 
-      clearTimeout(timeoutId);
+      console.log("Response status:", response.status); // Add this line
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const responseText = await response.text();
-      console.log("Raw response from backend:", responseText);
-
-      if (!responseText) {
-        throw new Error("Empty response from server");
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error("ReadableStream not supported");
       }
 
-      let data: AssistantResponse;
-      try {
-        data = JSON.parse(responseText);
-      } catch (parseError) {
-        console.error("Error parsing JSON:", parseError);
-        throw new Error("Invalid JSON response from server");
+      let partialResponse = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = new TextDecoder().decode(value);
+        console.log("Received chunk:", chunk); // Add this line
+        partialResponse += chunk;
+
+        // Split the partial response by newline characters
+        const jsonStrings = partialResponse.split("\n");
+
+        // Process all complete JSON objects
+        for (let i = 0; i < jsonStrings.length - 1; i++) {
+          try {
+            const parsedChunk = JSON.parse(jsonStrings[i]);
+            console.log("Parsed chunk:", parsedChunk);
+            if (parsedChunk.status && parsedChunk.status !== "completed") {
+              console.log("Status update:", parsedChunk.status);
+            } else if (parsedChunk.main_response) {
+              console.log("Updating messages with:", parsedChunk); // Add this line
+              setMessages((prevMessages) => [
+                ...prevMessages,
+                { role: "assistant", content: parsedChunk },
+              ]);
+            }
+          } catch (error) {
+            console.error("Error parsing JSON:", error);
+          }
+        }
+
+        // Keep the last (potentially incomplete) JSON string
+        partialResponse = jsonStrings[jsonStrings.length - 1];
       }
-
-      console.log("Parsed data from backend:", data);
-
-      if (!data.main_response) {
-        throw new Error("Missing 'main_response' field in server response");
+    } catch (error: unknown) {
+      console.error("Error in sendMessage:", error); // Modify this line
+      if (error instanceof Error) {
+        if (error.name === "AbortError") {
+          console.log("Fetch aborted");
+        } else {
+          console.error("Error sending message:", error.message);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+              role: "assistant",
+              content: "I'm sorry, I encountered an error. Please try again.",
+            },
+          ]);
+        }
+      } else {
+        console.error("An unknown error occurred");
       }
-
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { role: "assistant", content: data },
-      ]);
-    } catch (error) {
-      console.error("Error sending message:", error);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          role: "assistant",
-          content: "I'm sorry, I encountered an error. Please try again.",
-        },
-      ]);
     } finally {
       setIsLoading(false);
+      abortControllerRef.current = null;
     }
   };
 
@@ -344,6 +372,19 @@ const ResumeAssistant: React.FC = () => {
     window.open(resumeUrl, "_blank");
   };
 
+  const handleSuggestedQuestion = (question: string) => {
+    console.log("Handling suggested question:", question);
+    sendMessage(question);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+
   return (
     <div className="flex flex-col h-[calc(80vh-2rem)] bg-gray-950 text-gray-200 border border-gray-800 rounded-lg">
       <div className="flex items-center justify-between p-3 border-b border-gray-800">
@@ -367,7 +408,7 @@ const ResumeAssistant: React.FC = () => {
               {suggestedQuestions.map((question, index) => (
                 <button
                   key={index}
-                  onClick={() => sendMessage(question)}
+                  onClick={() => handleSuggestedQuestion(question)}
                   className="text-sm bg-gray-700 text-gray-200 px-3 py-2 rounded-full hover:bg-gray-600 transition-colors"
                 >
                   {question}
