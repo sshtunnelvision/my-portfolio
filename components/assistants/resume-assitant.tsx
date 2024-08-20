@@ -37,7 +37,7 @@ const ResumeAssistant: React.FC = () => {
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const suggestedQuestions = [
-    "Load Resume Dashboard",
+    "Tell me about Arek's work experience",
     // Add more suggested questions here
   ];
 
@@ -245,7 +245,7 @@ const ResumeAssistant: React.FC = () => {
     return (
       <Card className="w-full bg-gray-800 text-gray-200">
         <CardHeader>
-          <CardTitle>Resume Dashboard</CardTitle>
+          <CardTitle>CV Dashboard</CardTitle>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="education" className="w-full">
@@ -397,7 +397,7 @@ const ResumeAssistant: React.FC = () => {
           className="flex items-center text-xs bg-gray-700 text-gray-200 px-3 py-1 rounded-full hover:bg-gray-600 transition-colors ml-2"
         >
           <Download className="w-4 h-4 mr-1" />
-          Download Resume
+          Download CV
         </button>
       </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-4">

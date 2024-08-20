@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <section className="py-4">
+    <section className="py-2">
       <div className="container mx-auto px-4">
         <p>
           Welcome to my online portfolio, designed to showcase my skills,
