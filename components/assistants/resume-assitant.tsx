@@ -18,9 +18,9 @@ interface ResumeSection {
 
 interface AssistantResponse {
   main_response: string;
-  relevant_sections: ResumeSection[];
   follow_up_questions: string[];
   dashboard_data: any;
+  error?: string;
 }
 
 interface Message {
@@ -37,7 +37,7 @@ const ResumeAssistant: React.FC = () => {
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const suggestedQuestions = [
-    "Tell me about Arek's work experience",
+    "Tell me about Arek's Work",
     // Add more suggested questions here
   ];
 
@@ -67,8 +67,6 @@ const ResumeAssistant: React.FC = () => {
     ]);
     setInput("");
 
-    // console.log("Sending message:", messageText);
-
     try {
       abortControllerRef.current = new AbortController();
       const response = await fetch("/api/portfolio-assistant", {
@@ -81,8 +79,6 @@ const ResumeAssistant: React.FC = () => {
         }),
         signal: abortControllerRef.current.signal,
       });
-
-      // console.log("Response status:", response.status);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -99,7 +95,6 @@ const ResumeAssistant: React.FC = () => {
         if (done) break;
 
         const chunk = new TextDecoder().decode(value);
-        // console.log("Received chunk:", chunk);
         partialResponse += chunk;
 
         // Split the partial response by newline characters
@@ -109,31 +104,23 @@ const ResumeAssistant: React.FC = () => {
         for (let i = 0; i < jsonStrings.length - 1; i++) {
           try {
             const parsedChunk = JSON.parse(jsonStrings[i]);
-            // console.log("Parsed chunk:", parsedChunk);
             if (parsedChunk.status && parsedChunk.status !== "completed") {
-              // console.log("Status update:", parsedChunk.status);
-            } else if (parsedChunk.main_response) {
-              // console.log("Updating messages with:", parsedChunk);
+            } else if (parsedChunk.main_response || parsedChunk.error) {
               setMessages((prevMessages) => [
                 ...prevMessages,
                 { role: "assistant", content: parsedChunk },
               ]);
             }
-          } catch (error) {
-            console.error("Error parsing JSON:", error);
-          }
+          } catch (error) {}
         }
 
         // Keep the last (potentially incomplete) JSON string
         partialResponse = jsonStrings[jsonStrings.length - 1];
       }
     } catch (error: unknown) {
-      console.error("Error in sendMessage:", error); // Modify this line
       if (error instanceof Error) {
         if (error.name === "AbortError") {
-          // console.log("Fetch aborted");
         } else {
-          console.error("Error sending message:", error.message);
           setMessages((prevMessages) => [
             ...prevMessages,
             {
@@ -143,7 +130,6 @@ const ResumeAssistant: React.FC = () => {
           ]);
         }
       } else {
-        console.error("An unknown error occurred");
       }
     } finally {
       setIsLoading(false);
@@ -341,26 +327,35 @@ const ResumeAssistant: React.FC = () => {
       return <p>{content}</p>;
     }
 
+    if ("error" in content && content.error) {
+      return <p className="text-red-500">{content.error}</p>;
+    }
+
     return (
       <div className="space-y-4">
-        <div>{content.main_response}</div>
-        {(isLoading || content.dashboard_data) && (
+        {content.main_response && (
+          <div className="text-gray-200 mb-4">{content.main_response}</div>
+        )}
+        {content.dashboard_data && (
           <div className="mt-4">
             {renderDashboardData(content.dashboard_data)}
           </div>
         )}
         {content.follow_up_questions &&
           content.follow_up_questions.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {content.follow_up_questions.map((question, index) => (
-                <button
-                  key={index}
-                  onClick={() => sendMessage(question)}
-                  className="text-xs bg-gray-700 text-gray-200 px-3 py-1 rounded-full hover:bg-gray-600 transition-colors"
-                >
-                  {question}
-                </button>
-              ))}
+            <div className="mt-4">
+              <p className="text-sm text-gray-400 mb-2">Follow-up questions:</p>
+              <div className="flex flex-wrap gap-2">
+                {content.follow_up_questions.map((question, index) => (
+                  <button
+                    key={index}
+                    onClick={() => sendMessage(question)}
+                    className="text-xs bg-gray-700 text-gray-200 px-3 py-1 rounded-full hover:bg-gray-600 transition-colors"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
       </div>
@@ -373,7 +368,6 @@ const ResumeAssistant: React.FC = () => {
   };
 
   const handleSuggestedQuestion = (question: string) => {
-    // console.log("Handling suggested question:", question);
     sendMessage(question);
   };
 
