@@ -56,6 +56,16 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'navy-blue': '#000080',
+        'light-blue': '#ADD8E6',
+        'github-dark': '#0d1117',
+        'github-square': {
+          0: '#161b22',
+          1: '#0e4429',
+          2: '#006d32',
+          3: '#26a641',
+          4: '#39d353',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -75,6 +85,9 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      gridTemplateRows: {
+        '8': 'repeat(8, minmax(0, 1fr))',
       },
     },
   },
