@@ -2,7 +2,7 @@
 import React from "react";
 import { Boxes } from "./ui/background-boxes";
 import { cn } from "@/lib/utils";
-import { FaHandPaper, FaLightbulb } from "react-icons/fa";
+import { FaHandPaper } from "react-icons/fa";
 import {
   Tooltip,
   TooltipContent,
@@ -30,12 +30,12 @@ const Header = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="text-cyan-400 font-semibold glow-cyan inline-flex items-center">
+                <span className="text-cyan-400 font-semibold glow-cyan relative group">
                   make a difference
-                  <FaLightbulb className="ml-1 text-yellow-400" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
                 </span>
               </TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent side="bottom">
                 <p className="max-w-xs">
                   make a difference (phrase): to have a significant effect or
                   influence on a person or situation
@@ -47,12 +47,12 @@ const Header = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="text-cyan-400 font-semibold glow-cyan inline-flex items-center">
+                <span className="text-cyan-400 font-semibold glow-cyan relative group">
                   look cool
-                  <FaLightbulb className="ml-1 text-yellow-400" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
                 </span>
               </TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent side="bottom">
                 <p className="max-w-xs">
                   look cool (phrase): to have an attractive or impressive
                   appearance; to be fashionable or appealing
