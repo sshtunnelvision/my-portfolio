@@ -3,7 +3,6 @@ import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
 import Navbar from "@/components/navbar";
 import { cn } from "@/lib/utils";
-import Header from "@/components/header";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,13 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn("min-h-screen font-sans antialiased", fontSans.variable)}
+        className={cn(
+          "min-h-screen font-sans antialiased bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white",
+          fontSans.variable
+        )}
       >
-        <div className="bg-white text-gray-900">
-          <Navbar />
-          <Header />
-          <main className="container mx-auto px-4 py-6">{children}</main>
-        </div>
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
       </body>
     </html>
   );

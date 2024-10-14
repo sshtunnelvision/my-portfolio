@@ -2,7 +2,13 @@
 import React from "react";
 import { Boxes } from "./ui/background-boxes";
 import { cn } from "@/lib/utils";
-import { FaHandPaper } from "react-icons/fa";
+import { FaHandPaper, FaLightbulb } from "react-icons/fa";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Header = () => {
   return (
@@ -21,13 +27,39 @@ const Header = () => {
         </h1>
         <p className="text-xl sm:text-2xl text-neutral-300 max-w-3xl">
           Product engineering apps that{" "}
-          <span className="text-cyan-400 font-semibold glow-cyan">
-            make a difference
-          </span>{" "}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="text-cyan-400 font-semibold glow-cyan inline-flex items-center">
+                  make a difference
+                  <FaLightbulb className="ml-1 text-yellow-400" />
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="max-w-xs">
+                  make a difference (phrase): to have a significant effect or
+                  influence on a person or situation
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>{" "}
           and{" "}
-          <span className="text-cyan-400 font-semibold glow-cyan">
-            look cool
-          </span>{" "}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="text-cyan-400 font-semibold glow-cyan inline-flex items-center">
+                  look cool
+                  <FaLightbulb className="ml-1 text-yellow-400" />
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="max-w-xs">
+                  look cool (phrase): to have an attractive or impressive
+                  appearance; to be fashionable or appealing
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>{" "}
           at the same time.
         </p>
       </div>
