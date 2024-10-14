@@ -44,22 +44,20 @@ const projects: Project[] = [
 
 const WorkProduct = () => {
   return (
-    <div className="w-full bg-gradient-to-b from-gray-900 to-black py-20">
+    <div className="w-full bg-gradient-to-b from-slate-800 via-slate-800 to-slate-700 py-12 -mt-32 relative z-10">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-800 to-slate-700"></div>
       <motion.div
         id="projects"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        <h2 className="text-4xl font-bold mb-12 text-center text-white">
-          Featured Projects
-        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <Card
               key={index}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700 hover:border-cyan-500 transition-all duration-300 h-full flex flex-col"
+              className="bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600 hover:border-cyan-500 transition-all duration-300 h-full flex flex-col"
             >
               <CardHeader>
                 <CardTitle className="text-2xl font-semibold text-white flex justify-between items-center">
@@ -76,7 +74,7 @@ const WorkProduct = () => {
                     <Badge
                       key={tagIndex}
                       variant="secondary"
-                      className="bg-gray-700 text-cyan-400"
+                      className="bg-slate-600 text-cyan-400"
                     >
                       {tag}
                     </Badge>
