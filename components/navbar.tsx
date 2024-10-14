@@ -12,7 +12,7 @@ import { FaGithub } from "react-icons/fa"; // Import GitHub icon from react-icon
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/tools", label: "Tools" },
+
   { href: "/blog", label: "Blog" },
 ];
 
@@ -62,7 +62,7 @@ const Navbar = () => {
                   </a>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Source code for this website</p>
+                  <p>Source code for my portfolio</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

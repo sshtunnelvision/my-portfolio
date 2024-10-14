@@ -1,25 +1,23 @@
 import { NextResponse } from 'next/server';
+import redisClient from '@/lib/redis';
 
 const ACCUWEATHER_API_KEY = process.env.ACCUWEATHER_API_KEY;
 const BASE_URL = 'http://dataservice.accuweather.com';
 
-// Cache object
-let weatherCache: {
-  data: any;
-  timestamp: number;
-} | null = null;
-
-const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+const CACHE_DURATION = 60 * 60; // 1 hour in seconds
 
 export async function GET() {
   try {
-    // Check if we have cached data that's still valid
-    if (weatherCache && Date.now() - weatherCache.timestamp < CACHE_DURATION) {
-      console.log('Using cached weather data'); // Log for cached data
-      return NextResponse.json(weatherCache.data);
+    console.log('Attempting to retrieve weather data from Redis cache');
+    // Try to get cached data from Redis
+    const cachedData = await redisClient.get('weather_data');
+
+    if (cachedData) {
+      console.log('Using cached weather data');
+      return NextResponse.json(JSON.parse(cachedData));
     }
 
-    console.log('Fetching fresh weather data'); // Log for fresh data fetch
+    console.log('No cached data found. Fetching fresh weather data');
 
     // If no valid cache, fetch new data
     const locationResponse = await fetch(
@@ -38,12 +36,13 @@ export async function GET() {
       currentConditions: currentConditionsData[0],
     };
 
-    // Update the cache
-    weatherCache = {
-      data: weatherData,
-      timestamp: Date.now(),
-    };
+    console.log('Storing new weather data in Redis cache');
+    // Store the new data in Redis
+    await redisClient.set('weather_data', JSON.stringify(weatherData), {
+      EX: CACHE_DURATION
+    });
 
+    console.log('Returning fresh weather data');
     return NextResponse.json(weatherData);
   } catch (error) {
     console.error('Error fetching weather data:', error);
