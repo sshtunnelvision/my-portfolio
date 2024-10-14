@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import client from '@/lib/redis';
+import client, { connectToRedis } from '@/lib/redis';
 
 const ACCUWEATHER_API_KEY = process.env.ACCUWEATHER_API_KEY;
 const BASE_URL = 'http://dataservice.accuweather.com';
@@ -8,16 +8,20 @@ const CACHE_DURATION = 30 * 60; // 30 minutes in seconds
 
 export async function GET() {
   try {
-    // Check if Redis client is connected, if not, wait for it to connect
-    if (!client.isReady) {
-      await new Promise((resolve) => {
-        client.on('connect', resolve);
-      });
-    }
+    // Attempt to connect to Redis if not already connected
+    await connectToRedis();
 
     const now = Date.now();
-    const cachedData = await client.get('weather_data');
-    const cachedTimestamp = await client.get('weather_data_timestamp');
+    let cachedData, cachedTimestamp;
+
+    if (client.isReady) {
+      try {
+        cachedData = await client.get('weather_data');
+        cachedTimestamp = await client.get('weather_data_timestamp');
+      } catch (error) {
+        console.error('Error fetching cached data:', error);
+      }
+    }
 
     if (cachedData && cachedTimestamp) {
       const dataAge = now - parseInt(cachedTimestamp);
@@ -52,9 +56,18 @@ export async function GET() {
       fetchedAt: now,
     };
 
-    console.log('Storing new weather data in Redis cache');
-    await client.set('weather_data', JSON.stringify(weatherData));
-    await client.set('weather_data_timestamp', now.toString());
+    // Modify the caching part
+    if (client.isReady) {
+      try {
+        console.log('Storing new weather data in Redis cache');
+        await client.set('weather_data', JSON.stringify(weatherData));
+        await client.set('weather_data_timestamp', now.toString());
+      } catch (error) {
+        console.error('Error caching weather data:', error);
+      }
+    } else {
+      console.log('Redis not available, skipping caching');
+    }
 
     return NextResponse.json(weatherData);
   } catch (error) {

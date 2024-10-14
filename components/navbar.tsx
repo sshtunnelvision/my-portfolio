@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Weather from "./Weather";
 import {
@@ -19,6 +20,23 @@ const navLinks = [
 const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      if (scrollTop > 50) {
+        setHasScrolled(true);
+      } else {
+        setHasScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleNavigation = (href: string) => {
     if (href.startsWith("/#")) {
@@ -32,9 +50,19 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex justify-between items-center h-16">
+    <div
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        hasScrolled ? "px-4 py-2" : "px-0 py-0"
+      }`}
+    >
+      <div
+        className={`max-w-7xl mx-auto transition-all duration-300 ${
+          hasScrolled
+            ? "bg-slate-900/80 backdrop-blur-sm rounded-full shadow-lg"
+            : "bg-transparent"
+        }`}
+      >
+        <nav className="flex justify-between items-center h-16 px-6">
           <ul className="flex space-x-4">
             {navLinks.map(({ href, label }) => (
               <li key={href}>

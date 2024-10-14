@@ -20,9 +20,15 @@ const Header = () => {
           <FaHandPaper className="inline-block ml-2 animate-[wave_2s_ease-in-out_infinite]" />
         </h1>
         <p className="text-xl sm:text-2xl text-neutral-300 max-w-3xl">
-          Product Engineer building software with{" "}
-          <span className="text-cyan-400 font-semibold">marketing intent</span>{" "}
-          and <span className="text-cyan-400 font-semibold">design</span>.
+          Product Engineer building software with an emphasis on <br />
+          <span className="text-cyan-400 font-semibold">
+            marketing strategy
+          </span>{" "}
+          and {""}
+          <span className="text-cyan-400 font-semibold">
+            user-centric design
+          </span>
+          .
         </p>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-gray-900 to-black"></div>
