@@ -20,7 +20,15 @@ const Header = () => {
           <FaHandPaper className="inline-block ml-2 animate-[wave_2s_ease-in-out_infinite]" />
         </h1>
         <p className="text-xl sm:text-2xl text-neutral-300 max-w-3xl">
-          Maker of apps that make a difference and look cool at the same time.
+          Product engineering apps that{" "}
+          <span className="text-cyan-400 font-semibold glow-cyan">
+            make a difference
+          </span>{" "}
+          and{" "}
+          <span className="text-cyan-400 font-semibold glow-cyan">
+            look cool
+          </span>{" "}
+          at the same time.
         </p>
       </div>
     </div>
