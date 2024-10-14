@@ -12,7 +12,9 @@ client.on('error', (error) => {
     console.error('Redis connection error:', error);
 });
 
-// Connect to Redis
-client.connect().catch(console.error);
+// Connect to Redis only if it's not already connected or connecting
+if (!client.isOpen) {
+    client.connect().catch(console.error);
+}
 
 export default client;
