@@ -30,9 +30,8 @@ const Header = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="text-cyan-400 font-semibold glow-cyan relative group">
+                <span className="text-cyan-400 font-semibold glow-cyan hover:cursor-help">
                   make a difference
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
                 </span>
               </TooltipTrigger>
               <TooltipContent side="bottom">
@@ -47,9 +46,8 @@ const Header = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <span className="text-cyan-400 font-semibold glow-cyan relative group">
+                <span className="text-cyan-400 font-semibold glow-cyan hover:cursor-help">
                   look cool
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 transition-all group-hover:w-full"></span>
                 </span>
               </TooltipTrigger>
               <TooltipContent side="bottom">
