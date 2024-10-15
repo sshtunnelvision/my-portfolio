@@ -9,7 +9,11 @@ const Header = () => {
     <div className="h-screen relative w-full overflow-hidden bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex flex-col justify-center items-center z-0">
       <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-10 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
 
-      <Boxes className="absolute inset-0" />
+      {/* Hide Boxes on mobile, show on larger screens */}
+      <div className="hidden sm:block">
+        <Boxes className="absolute inset-0" />
+      </div>
+
       <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1
           className={cn(
