@@ -66,7 +66,7 @@ const Weather: React.FC = () => {
   };
 
   if (loading || !weather)
-    return <div className="text-gray-300">Loading...</div>;
+    return <div className="text-gray-300 text-xs sm:text-sm">Loading...</div>;
 
   const { WeatherText, Temperature } = weather.currentConditions;
 
@@ -74,9 +74,9 @@ const Weather: React.FC = () => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className="flex items-center space-x-2 text-sm cursor-pointer text-gray-300 hover:text-white">
+          <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm cursor-pointer text-gray-300 hover:text-white">
             <FaMapMarkerAlt className="text-gray-300" />
-            <span className="font-medium">NYC</span>
+            <span className="font-medium text-[10px] sm:text-sm">NYC</span>
             {getWeatherIcon(WeatherText)}
             <span>
               {Temperature.Imperial.Value}°{Temperature.Imperial.Unit}
@@ -84,7 +84,7 @@ const Weather: React.FC = () => {
           </div>
         </TooltipTrigger>
         <TooltipContent>
-          <p>
+          <p className="text-xs sm:text-sm">
             Weather data powered by{" "}
             <a
               href="https://developer.accuweather.com/"
