@@ -6,7 +6,6 @@ export default function ContactPage() {
   return (
     <div className="w-full">
       <div className="mb-8">
-        <h1 className="text-xl font-bold mb-2">Contact</h1>
         <p className="text-lg text-zinc-300 max-w-3xl">
           Thank you for your interest! If you would like to discuss any
           opportunities, or have any questions at all, please feel free to reach
