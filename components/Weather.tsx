@@ -9,12 +9,6 @@ import {
   FaSnowflake,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 
 interface WeatherData {
   locationKey: string;
@@ -71,33 +65,14 @@ const Weather: React.FC = () => {
   const { WeatherText, Temperature } = weather.currentConditions;
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm cursor-pointer text-gray-300 hover:text-white">
-            <FaMapMarkerAlt className="text-gray-300" />
-            <span className="font-medium text-[10px] sm:text-sm">NYC</span>
-            {getWeatherIcon(WeatherText)}
-            <span>
-              {Temperature.Imperial.Value}°{Temperature.Imperial.Unit}
-            </span>
-          </div>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p className="text-xs sm:text-sm">
-            Weather data powered by{" "}
-            <a
-              href="https://developer.accuweather.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              AccuWeather API
-            </a>
-          </p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-300">
+      <FaMapMarkerAlt className="text-gray-300" />
+      <span className="font-medium text-[10px] sm:text-sm">NYC</span>
+      {getWeatherIcon(WeatherText)}
+      <span>
+        {Temperature.Imperial.Value}°{Temperature.Imperial.Unit}
+      </span>
+    </div>
   );
 };
 
