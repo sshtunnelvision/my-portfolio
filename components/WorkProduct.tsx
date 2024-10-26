@@ -24,7 +24,7 @@ const projects = [
     techStack: ["NextJS", "React", "Flask", "Prisma", "Supabase"],
   },
   {
-    title: "Kunochi Image Generator With Custom LoRa",
+    title: "Kunochi Image Generator With Custom LoRAs",
     image: "/kunochi-hero.jpg",
     description:
       "A custom image generation tool with my custom LoRAs (Low-Rank Adaptation) integrated. This project demonstrates the power of AI in creating unique, high-quality images tailored to specific themes or styles.",
@@ -41,7 +41,7 @@ const WorkProduct = () => {
     <div className="flex-grow flex flex-col items-start justify-center w-full pt-4">
       <h1 className="text-lg mb-2">Projects</h1>
       <div className="w-full h-px bg-zinc-700 mb-4"></div>
-      <div className="w-full space-y-8">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, index) => (
           <Dialog
             key={index}
@@ -50,32 +50,31 @@ const WorkProduct = () => {
           >
             <DialogTrigger asChild>
               <Card
-                className="w-full cursor-pointer border-2 border-white overflow-hidden transition-colors duration-300 hover:border-cyan-400"
+                className="cursor-pointer border-2 border-white overflow-hidden transition-colors duration-300 hover:border-cyan-400"
                 onClick={() => setSelectedProject(project)}
               >
                 <CardContent className="p-0 relative">
-                  <div className="relative w-full aspect-[21/9] bg-black">
+                  <div className="relative w-full aspect-square bg-black">
                     <Image
                       src={project.image}
                       alt={project.title}
                       layout="fill"
-                      objectFit="contain"
+                      objectFit="cover"
                       objectPosition="center"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 to-zinc-800/70 backdrop-blur-[2px] flex flex-col items-center justify-center text-white p-6">
-                      <h2 className="text-xl font-bold mb-2 text-center">
-                        {project.title}
-                      </h2>
-                      <div className="flex flex-wrap justify-center gap-2 mb-4">
-                        {project.techStack.map((tech, i) => (
-                          <Badge key={i} variant="default">
-                            {tech}
-                          </Badge>
-                        ))}
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 to-zinc-800/70 backdrop-blur-[2px] flex flex-col justify-between text-white">
+                      <div className="absolute inset-0 flex flex-col justify-center items-center p-6">
+                        <div className="h-1/2 flex items-center">
+                          <h2 className="text-lg font-bold text-center leading-tight">
+                            {project.title}
+                          </h2>
+                        </div>
+                        <div className="absolute bottom-6">
+                          <p className="text-xs font-semibold text-cyan-400 text-center">
+                            View Demo
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-sm font-semibold text-cyan-400">
-                        View Demo
-                      </p>
                     </div>
                   </div>
                 </CardContent>

@@ -5,9 +5,9 @@ import { FaHandPaper } from "react-icons/fa";
 const Header = () => {
   return (
     <div className="mb-8">
-      <h1 className="text-xl font-bold mb-2">
+      <h1 className="text-xl font-bold mb-2 flex items-center">
         Hi, I&apos;m Arek Halpern{" "}
-        <FaHandPaper className="inline-block ml-2 animate-[wave_2s_ease-in-out_infinite]" />
+        <FaHandPaper className="inline-block ml-2 animate-wave" />
       </h1>
       <p className="text-lg text-zinc-300 max-w-3xl">
         Product manager, engineer and founder building software with an emphasis
