@@ -25,7 +25,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;
-      if (scrollTop > 50) {
+      if (scrollTop > 10) {
         setHasScrolled(true);
       } else {
         setHasScrolled(false);
@@ -51,28 +51,24 @@ const Navbar = () => {
   };
 
   return (
-    <div
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-6 ${
-        hasScrolled ? "py-2" : "py-1"
-      }`}
-    >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-8">
+      <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
         <div
           className={`transition-all duration-300 ${
             hasScrolled
-              ? "bg-zinc-900/80 backdrop-blur-sm rounded-full shadow-lg"
+              ? "bg-zinc-900/70 backdrop-blur-md border border-zinc-800/50 shadow-lg px-4"
               : "bg-transparent"
-          }`}
+          } rounded-xl my-2`}
         >
-          <nav className="flex justify-between items-center h-12">
-            <div className="flex items-center">
+          <nav className="flex justify-between items-center h-14">
+            <div className={`flex items-center ${hasScrolled ? "" : "-ml-3"}`}>
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-zinc-300 hover:text-white mr-4 sm:hidden"
+                className="text-zinc-300 hover:text-white mr-2 sm:hidden"
               >
-                {isMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+                {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
               </button>
-              <ul className="hidden sm:flex space-x-6">
+              <ul className="hidden sm:flex space-x-4">
                 {navLinks.map(({ href, label }) => (
                   <li key={href}>
                     <button
@@ -85,7 +81,7 @@ const Navbar = () => {
                 ))}
               </ul>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <Weather />
               <TooltipProvider>
                 <Tooltip>
@@ -96,7 +92,7 @@ const Navbar = () => {
                       rel="noopener noreferrer"
                       className="flex items-center text-zinc-300 hover:text-white transition-colors duration-200"
                     >
-                      <FaGithub size={20} />
+                      <FaGithub size={18} />
                     </a>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -124,7 +120,7 @@ const Navbar = () => {
           </ul>
         </div>
       )}
-    </div>
+    </header>
   );
 };
 

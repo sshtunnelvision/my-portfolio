@@ -3,7 +3,7 @@ import WorkProduct from "@/components/WorkProduct";
 
 export default function Home() {
   return (
-    <div className="flex flex-col h-full py-8">
+    <div className="w-full">
       <Header />
       <WorkProduct />
     </div>

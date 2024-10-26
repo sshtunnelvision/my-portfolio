@@ -11,7 +11,8 @@ const Header = () => {
       </h1>
       <p className="text-lg text-zinc-300 max-w-3xl">
         Product manager, engineer and founder building software with an emphasis
-        on <span className="text-cyan-400">marketing strategy</span> and{" "}
+        on <br className="hidden sm:inline" />
+        <span className="text-cyan-400">marketing strategy</span> and{" "}
         <span className="text-cyan-400">user-centric design</span>.
       </p>
     </div>
