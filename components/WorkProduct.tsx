@@ -50,7 +50,7 @@ const WorkProduct = () => {
           >
             <DialogTrigger asChild>
               <Card
-                className="w-full cursor-pointer border-2 border-white overflow-hidden"
+                className="w-full cursor-pointer border-2 border-white overflow-hidden transition-colors duration-300 hover:border-cyan-400"
                 onClick={() => setSelectedProject(project)}
               >
                 <CardContent className="p-0 relative">
