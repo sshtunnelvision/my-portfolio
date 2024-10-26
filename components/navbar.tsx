@@ -3,13 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Weather from "./Weather";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { FaGithub, FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -19,17 +13,14 @@ const navLinks = [
 const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [scrollOpacity, setScrollOpacity] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.pageYOffset;
-      if (scrollTop > 10) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
+      const opacity = Math.min(scrollTop / 100, 0.7); // Reduced max opacity for more transparency
+      setScrollOpacity(opacity);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -51,29 +42,41 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pt-8">
+    <header className="fixed top-0 left-0 right-0 z-50 pt-8">
       <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
         <div
-          className={`transition-all duration-300 ${
-            hasScrolled
-              ? "bg-zinc-900/70 backdrop-blur-md border border-zinc-800/50 shadow-lg px-4"
-              : "bg-transparent"
-          } rounded-xl my-2`}
+          className={`relative rounded-xl my-2 transition-all duration-300 ${
+            scrollOpacity > 0 ? "backdrop-blur-md" : ""
+          }`}
         >
-          <nav className="flex justify-between items-center h-14">
-            <div className={`flex items-center ${hasScrolled ? "" : "-ml-3"}`}>
+          <div
+            className="absolute inset-0 bg-zinc-900/50 rounded-xl pointer-events-none"
+            style={{ opacity: scrollOpacity }}
+          ></div>
+          <div
+            className="absolute inset-0 border border-zinc-400/20 rounded-xl pointer-events-none"
+            style={{ opacity: scrollOpacity }}
+          ></div>
+          <nav className="relative flex justify-between items-center h-14">
+            <div className="flex items-center">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-zinc-300 hover:text-white mr-2 sm:hidden"
+                className="text-zinc-300 hover:text-white px-4 sm:hidden focus:outline-none focus:ring-0"
               >
                 {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
               </button>
-              <ul className="hidden sm:flex space-x-4">
-                {navLinks.map(({ href, label }) => (
+              <ul
+                className={`hidden sm:flex transition-all duration-300 ${
+                  scrollOpacity > 0 ? "ml-0" : "-ml-4"
+                }`}
+              >
+                {navLinks.map(({ href, label }, index) => (
                   <li key={href}>
                     <button
                       onClick={() => handleNavigation(href)}
-                      className="px-3 py-2 rounded-md text-sm font-medium text-zinc-300 hover:text-white transition-colors duration-200"
+                      className={`px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-0 ${
+                        index === 0 ? "rounded-l-xl" : ""
+                      }`}
                     >
                       {label}
                     </button>
@@ -81,20 +84,20 @@ const Navbar = () => {
                 ))}
               </ul>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center pr-4">
               <Weather />
             </div>
           </nav>
         </div>
       </div>
       {isMenuOpen && (
-        <div className="sm:hidden bg-zinc-900/95 backdrop-blur-sm">
+        <div className="sm:hidden bg-zinc-900/80 backdrop-blur-md">
           <ul className="py-2">
             {navLinks.map(({ href, label }) => (
               <li key={href}>
                 <button
                   onClick={() => handleNavigation(href)}
-                  className="block w-full px-4 py-2 text-left text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors duration-200"
+                  className="block w-full px-4 py-2 text-left text-sm font-medium text-zinc-300 hover:text-white hover:bg-zinc-800/50 transition-colors duration-200 focus:outline-none focus:ring-0"
                 >
                   {label}
                 </button>
