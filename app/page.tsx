@@ -3,10 +3,9 @@ import WorkProduct from "@/components/WorkProduct";
 
 export default function Home() {
   return (
-    <div className="relative">
+    <div className="flex flex-col h-full py-8">
       <Header />
       <WorkProduct />
-      {/* Add other landing page content here */}
     </div>
   );
 }

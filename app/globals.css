@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'SUSE';
+  src: url('/fonts/SUSE-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.suse-light {
+  font-family: "SUSE", Arial, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -59,24 +74,5 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
 
-.bg-navy {
-  background-color: #02172c;
-}
 
-html, body {
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-html {
-  overflow-y: auto;
-}
