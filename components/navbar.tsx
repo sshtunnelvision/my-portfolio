@@ -84,7 +84,11 @@ const Navbar = () => {
                 ))}
               </ul>
             </div>
-            <div className="flex items-center pr-4">
+            <div
+              className={`flex items-center transition-all duration-300 ${
+                scrollOpacity > 0 ? "pr-4" : "pr-0"
+              }`}
+            >
               <Weather />
             </div>
           </nav>
