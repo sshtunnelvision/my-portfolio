@@ -10,7 +10,7 @@ const Header = () => {
         <FaHandPaper className="inline-block ml-2 animate-wave" />
       </h1>
       <p className="text-lg text-zinc-300 max-w-3xl">
-        Product manager, engineer and founder building software with an emphasis
+        Product engineer and project manager building software with an emphasis
         on <br className="hidden sm:inline" />
         <span className="text-cyan-400">marketing strategy</span> and{" "}
         <span className="text-cyan-400">user-centric design</span>.
