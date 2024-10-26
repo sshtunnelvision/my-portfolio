@@ -8,28 +8,31 @@ import { SquareArrowOutUpRight } from "lucide-react";
 
 const projects = [
   {
-    title: "Smrtfeed In-line Text Editor",
+    title: "Smrtfeed Text Editor",
     image: "/smrtfeed-editor2.png",
     description:
-      "This AI In-line Text Editor seamlessly integrates an LLM into your writing process, offering real-time suggestions and improvements as you type, while still giving you full control over your document down to each character. It enhances productivity and writing quality by providing context-aware assistance directly within your document.",
+      "The Smrtfeed editor seamlessly integrates an LLM into your writing process, offering real-time suggestions and improvements as you type, while still giving you full control over your document down to each character. It enhances productivity and writing quality by providing context-aware assistance directly within your document.",
     videoUrl: "https://www.youtube.com/embed/5XyEKVpZjLo?si=NLJALZ90Rq1oYdlZ",
     techStack: ["NextJS", "React", "TipTap", "OpenAI API"],
+    imagePosition: "center",
   },
   {
-    title: "Kunochi Copy Table",
+    title: "Copy Table With LLM",
     image: "/copy-table.png",
     description:
       "An AI-powered copy table for ideating content ideas at lightning speed. This tool speeds up copywriting brainstorming processes, allowing you to generate and organize creative content concepts efficiently.",
     videoUrl: "https://www.youtube.com/embed/vJ9nfZpi-Fs?si=_GQOEAIenOUKwVRS",
     techStack: ["NextJS", "React", "Flask", "Prisma", "Supabase"],
+    imagePosition: "center",
   },
   {
-    title: "Kunochi Image Generator With Custom LoRAs",
+    title: "DIffusion w/ LoRA",
     image: "/kunochi-hero.jpg",
     description:
       "A custom image generation tool with my custom LoRAs (Low-Rank Adaptation) integrated. This project demonstrates the power of AI in creating unique, high-quality images tailored to specific themes or styles.",
     videoUrl: "https://www.youtube.com/embed/EKldEk2WJ7I?si=SVSyjxrT23CyC-rf",
     techStack: ["NextJS", "React", "Flux", "Python"],
+    imagePosition: "center",
   },
 ];
 
@@ -54,30 +57,25 @@ const WorkProduct = () => {
                 onClick={() => setSelectedProject(project)}
               >
                 <WobbleCard
-                  containerClassName="border-2 border-white overflow-hidden transition-colors duration-300 hover:border-cyan-400 bg-black"
-                  className="p-0 bg-black relative"
+                  containerClassName="border-2 border-white overflow-hidden transition-colors duration-300 hover:border-cyan-400"
+                  className="p-0 relative aspect-square"
                 >
-                  <div className="w-full pb-[100%] relative">
-                    <div className="absolute inset-0">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        layout="fill"
-                        objectFit="cover"
-                        objectPosition="center"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 to-zinc-800/70 backdrop-blur-[2px] flex flex-col justify-between text-white">
-                        <div className="absolute inset-0 flex flex-col justify-center items-center p-6">
-                          <div className="h-1/2 flex items-center">
-                            <h2 className="text-lg font-bold text-center leading-tight">
-                              {project.title}
-                            </h2>
-                          </div>
-                        </div>
-                      </div>
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    layout="fill"
+                    objectFit="cover"
+                    objectPosition={project.imagePosition || "center"}
+                    className="z-0"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 to-zinc-800/70 backdrop-blur-[2px] flex flex-col justify-between text-white z-10">
+                    <div className="absolute inset-0 flex flex-col justify-center items-center p-6">
+                      <h2 className="text-lg font-bold text-center leading-tight">
+                        {project.title}
+                      </h2>
                     </div>
                   </div>
-                  <div className="absolute bottom-2 right-2 z-10">
+                  <div className="absolute bottom-2 right-2 z-20">
                     <SquareArrowOutUpRight className="w-4 h-4 text-cyan-400" />
                   </div>
                 </WobbleCard>

@@ -4,14 +4,15 @@ import { SiHuggingface } from "react-icons/si";
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col items-start justify-start min-h-screen bg-zinc-900 text-white px-4 py-8">
-      <p className="text-lg text-zinc-300 max-w-3xl mb-6">
-        Thank you for your interest!
-      </p>
-      <p className="text-lg text-zinc-300 max-w-3xl mb-6">
-        If you would like to discuss any opportunities, or have any questions at
-        all, please feel free to reach out.
-      </p>
+    <div className="w-full">
+      <div className="mb-8">
+        <h1 className="text-xl font-bold mb-2">Contact</h1>
+        <p className="text-lg text-zinc-300 max-w-3xl">
+          Thank you for your interest! If you would like to discuss any
+          opportunities, or have any questions at all, please feel free to reach
+          out.
+        </p>
+      </div>
       <div className="flex space-x-4">
         <a
           href="mailto:arek.halpern@gmail.com"
