@@ -83,23 +83,6 @@ const Navbar = () => {
             </div>
             <div className="flex items-center space-x-3">
               <Weather />
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <a
-                      href="https://github.com/ArekHalpern/my-portfolio"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-zinc-300 hover:text-white transition-colors duration-200"
-                    >
-                      <FaGithub size={18} />
-                    </a>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Source code for my portfolio</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
             </div>
           </nav>
         </div>

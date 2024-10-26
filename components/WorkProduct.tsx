@@ -4,28 +4,32 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 const projects = [
   {
     title: "Smrtfeed In-line Text Editor",
     image: "/smrtfeed-editor2.png",
     description:
-      "This AI In-line Text Editor seamlessly integrates artificial intelligence into your writing process, offering real-time suggestions and improvements as you type. It enhances productivity and writing quality by providing context-aware assistance directly within your document.",
+      "This AI In-line Text Editor seamlessly integrates an LLM into your writing process, offering real-time suggestions and improvements as you type, while still giving you full control over your document down to each character. It enhances productivity and writing quality by providing context-aware assistance directly within your document.",
     videoUrl: "https://www.youtube.com/embed/5XyEKVpZjLo?si=NLJALZ90Rq1oYdlZ",
+    techStack: ["NextJS", "React", "TipTap", "OpenAI API"],
   },
   {
     title: "Kunochi Copy Table",
     image: "/copy-table.png",
     description:
-      "An AI-powered copy table for ideating content ideas at lightning speed. This tool revolutionizes the brainstorming process, allowing you to generate and organize creative content concepts efficiently.",
+      "An AI-powered copy table for ideating content ideas at lightning speed. This tool speeds up copywriting brainstorming processes, allowing you to generate and organize creative content concepts efficiently.",
     videoUrl: "https://www.youtube.com/embed/vJ9nfZpi-Fs?si=_GQOEAIenOUKwVRS",
+    techStack: ["NextJS", "React", "Flask", "Prisma", "Supabase"],
   },
   {
     title: "Kunochi Image Generator With Custom LoRa",
     image: "/kunochi-hero.jpg",
     description:
-      "A custom image generation tool using LoRa (Low-Rank Adaptation) technology. This project demonstrates the power of AI in creating unique, high-quality images tailored to specific themes or styles.",
+      "A custom image generation tool with my custom LoRAs (Low-Rank Adaptation) integrated. This project demonstrates the power of AI in creating unique, high-quality images tailored to specific themes or styles.",
     videoUrl: "https://www.youtube.com/embed/EKldEk2WJ7I?si=SVSyjxrT23CyC-rf",
+    techStack: ["NextJS", "React", "Flux", "Python"],
   },
 ];
 
@@ -46,7 +50,7 @@ const WorkProduct = () => {
           >
             <DialogTrigger asChild>
               <Card
-                className="w-full cursor-pointer transition-all duration-300 hover:shadow-lg border border-cyan-400/20 overflow-hidden group"
+                className="w-full cursor-pointer border-2 border-white overflow-hidden"
                 onClick={() => setSelectedProject(project)}
               >
                 <CardContent className="p-0 relative">
@@ -58,17 +62,26 @@ const WorkProduct = () => {
                       objectFit="contain"
                       objectPosition="center"
                     />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/80 to-zinc-800/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white">
-                    <h2 className="text-xl font-bold text-center mb-1">
-                      {project.title}
-                    </h2>
-                    <p className="text-sm font-semibold">View Demo</p>
+                    <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 to-zinc-800/70 backdrop-blur-[2px] flex flex-col items-center justify-center text-white p-6">
+                      <h2 className="text-xl font-bold mb-2 text-center">
+                        {project.title}
+                      </h2>
+                      <div className="flex flex-wrap justify-center gap-2 mb-4">
+                        {project.techStack.map((tech, i) => (
+                          <Badge key={i} variant="default">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                      <p className="text-sm font-semibold text-cyan-400">
+                        View Demo
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[725px] bg-zinc-900 border-zinc-800">
+            <DialogContent className="sm:max-w-[725px] bg-zinc-900 border-2 border-white">
               <div className="aspect-video w-full">
                 <iframe
                   className="w-full h-full"
@@ -83,6 +96,16 @@ const WorkProduct = () => {
               <p className="mt-4 text-sm text-zinc-300">
                 {selectedProject.description}
               </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {selectedProject.techStack.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="text-xs bg-cyan-500/20 px-2 py-1 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </DialogContent>
           </Dialog>
         ))}
