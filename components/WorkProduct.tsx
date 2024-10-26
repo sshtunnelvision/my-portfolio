@@ -26,7 +26,7 @@ const projects = [
     imagePosition: "center",
   },
   {
-    title: "DIffusion w/ LoRA",
+    title: "Diffusion w/ LoRA",
     image: "/kunochi-hero.jpg",
     description:
       "A custom image generation tool with my custom LoRAs (Low-Rank Adaptation) integrated. This project demonstrates the power of AI in creating unique, high-quality images tailored to specific themes or styles.",
