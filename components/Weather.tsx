@@ -42,6 +42,10 @@ const Weather: React.FC = () => {
     };
 
     fetchWeather();
+
+    const intervalId = setInterval(fetchWeather, 5 * 60 * 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   const getWeatherIcon = (weatherText: string) => {

@@ -1,5 +1,7 @@
 import { createClient } from 'redis';
 
+export const CACHE_DURATION = 5 * 60; // 5 minutes in seconds
+
 const client = createClient({
     password: process.env.REDIS_PASSWORD,
     socket: {
