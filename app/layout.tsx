@@ -14,6 +14,26 @@ const ubuntuMono = Ubuntu_Mono({
 export const metadata: Metadata = {
   title: "Arek Halpern's Portfolio",
   description: "Arek Halpern's Portfolio",
+  icons: {
+    icon: [
+      {
+        url: "/ah-logo-2.png",
+        sizes: "32x32",
+      },
+      {
+        url: "/ah-logo-2.png",
+        sizes: "48x48",
+      },
+      {
+        url: "/ah-logo-2.png",
+        sizes: "96x96",
+      },
+    ],
+    apple: {
+      url: "/ah-logo-2.png",
+      sizes: "180x180",
+    },
+  },
 };
 
 export default function RootLayout({
