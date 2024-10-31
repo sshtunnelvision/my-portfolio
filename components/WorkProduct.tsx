@@ -11,8 +11,11 @@ const projects = [
     title: "AI In-Line Text Editor",
     image: "/smrtfeed-editor2.png",
     description:
-      "The Smrtfeed editor seamlessly integrates an LLM into your writing process, offering real-time suggestions and improvements as you type, while still giving you full control over your document down to each character. It enhances productivity and writing quality by providing context-aware assistance directly within your document.",
-    videoUrl: "https://www.youtube.com/embed/5XyEKVpZjLo?si=NLJALZ90Rq1oYdlZ",
+      "The Smrtfeed editor seamlessly integrates AI into your writing process, offering real-time suggestions and improvements as you type, while still giving you full control over your document down to each character. It enhances productivity and writing quality by providing context-aware assistance directly within your document. Smrtfeed also has the ability to generate images from text, and can be used to generate images for your documents.",
+    videoUrls: [
+      "https://www.youtube.com/embed/5XyEKVpZjLo?si=NLJALZ90Rq1oYdlZ",
+      "https://www.youtube.com/embed/IquuE82Ki38",
+    ],
     techStack: ["NextJS", "Typescript", "React", "TipTap", "REST APIs"],
     imagePosition: "center",
   },
@@ -121,11 +124,15 @@ const WorkProduct = () => {
               </div>
             </DialogTrigger>
             {!project.externalLink && (
-              <DialogContent className="sm:max-w-[725px] bg-zinc-900 border-2 border-white">
+              <DialogContent className="sm:max-w-[725px] bg-zinc-900 border-2 border-white max-h-[90vh] overflow-y-auto">
                 <div className="aspect-video w-full">
                   <iframe
                     className="w-full h-full"
-                    src={selectedProject.videoUrl}
+                    src={
+                      selectedProject.videoUrls
+                        ? selectedProject.videoUrls[0]
+                        : selectedProject.videoUrl
+                    }
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -146,6 +153,20 @@ const WorkProduct = () => {
                     </span>
                   ))}
                 </div>
+                {selectedProject.videoUrls &&
+                  selectedProject.videoUrls.length > 1 && (
+                    <div className="mt-4 aspect-video w-full">
+                      <iframe
+                        className="w-full h-full"
+                        src={selectedProject.videoUrls[1]}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  )}
               </DialogContent>
             )}
           </Dialog>
