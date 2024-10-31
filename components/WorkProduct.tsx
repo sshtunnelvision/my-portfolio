@@ -40,7 +40,7 @@ const projects = [
     title: "AI Image Generator",
     image: "/kunochi-hero.jpg",
     description:
-      "A custom image generation tool with my custom LoRAs (Low-Rank Adaptation) integrated. This project demonstrates the power of AI in creating unique, high-quality images tailored to specific themes or styles.",
+      "An image generation tool with my custom LoRAs (Low-Rank Adaptation) integrated. This project demonstrates the power of AI in creating unique, high-quality images tailored to specific themes or styles.",
     videoUrl: "https://www.youtube.com/embed/EKldEk2WJ7I?si=SVSyjxrT23CyC-rf",
     techStack: ["NextJS", "Typescript", "React", "Flux", "Python", "REST APIs"],
     imagePosition: "center",
