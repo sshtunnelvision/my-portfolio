@@ -13,7 +13,7 @@ const Header = () => {
         I love to build software with an emphasis on{" "}
         <br className="hidden sm:inline" />
         <span className="text-cyan-400">marketing strategy</span> and{" "}
-        <span className="text-cyan-400">user-centric design</span>.
+        <span className="text-cyan-400">generative AI</span>.
       </p>
     </div>
   );
