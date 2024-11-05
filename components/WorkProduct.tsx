@@ -13,8 +13,8 @@ const projects = [
     description:
       "The Smrtfeed editor seamlessly integrates AI into your writing process, offering real-time suggestions and improvements as you type, while still giving you full control over your document down to each character. It enhances productivity and writing quality by providing context-aware assistance directly within your document. Smrtfeed also has the ability to generate images from text, and can be used to generate images for your documents.",
     videoUrls: [
+      "https://www.youtube.com/embed/s-7Y1WTh8ps",
       "https://www.youtube.com/embed/5XyEKVpZjLo?si=NLJALZ90Rq1oYdlZ",
-      "https://www.youtube.com/embed/IquuE82Ki38",
     ],
     techStack: ["NextJS", "Typescript", "React", "TipTap", "REST APIs"],
     imagePosition: "center",
