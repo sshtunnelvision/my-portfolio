@@ -72,7 +72,7 @@ const WorkProduct = () => {
   const [selectedProject, setSelectedProject] = useState(projects[0]);
 
   return (
-    <div className="flex-grow flex flex-col items-start justify-center w-full pt-4">
+    <div className="flex-grow flex flex-col items-start justify-center w-full pt-4 opacity-0 animate-fade-in-up [animation-delay:600ms]">
       <h1 className="text-lg mb-2">Projects</h1>
       <div className="w-full h-px bg-zinc-700 mb-4"></div>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

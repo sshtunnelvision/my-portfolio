@@ -5,11 +5,11 @@ import { FaHandPaper } from "react-icons/fa";
 const Header = () => {
   return (
     <div className="mb-8">
-      <h1 className="text-xl font-bold mb-2 flex items-center">
+      <h1 className="text-xl font-bold mb-2 flex items-center opacity-0 animate-fade-in-up [animation-delay:200ms]">
         Hi, I&apos;m Arek Halpern{" "}
         <FaHandPaper className="inline-block ml-2 animate-wave" />
       </h1>
-      <p className="text-lg text-zinc-300 max-w-3xl">
+      <p className="text-lg text-zinc-300 max-w-3xl opacity-0 animate-fade-in-up [animation-delay:400ms]">
         I love to build software with an emphasis on{" "}
         <br className="hidden sm:inline" />
         <span className="text-cyan-400">marketing strategy</span> and{" "}
