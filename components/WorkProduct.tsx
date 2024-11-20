@@ -100,10 +100,11 @@ const WorkProduct = () => {
                   <Image
                     src={project.image}
                     alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition={project.imagePosition || "center"}
-                    className="z-0"
+                    fill
+                    className="object-cover object-position-center z-0"
+                    style={{
+                      objectPosition: project.imagePosition || "center",
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 to-zinc-800/70 backdrop-blur-[2px] flex flex-col justify-between text-white z-10">
                     <div className="absolute inset-0 flex flex-col justify-center items-center p-6">
