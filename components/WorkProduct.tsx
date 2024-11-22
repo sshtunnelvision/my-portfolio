@@ -65,6 +65,23 @@ const projects = [
       "https://www.figma.com/board/6iVNRLCdXudIzWbrhQAkHP/Loras?node-id=0-1&t=G1HrZoH2H1Q9zfPR-1",
     linkType: "figma",
   },
+  {
+    title: "YouTube To Content Generation",
+    image: "/youtube-logo.png",
+    description:
+      "An AI-powered tool that transforms YouTube videos into engaging content threads. It automatically transcribes videos, processes the content through specialized prompts, and generates informative X (Twitter) threads. The system handles the complete pipeline from video processing to final content creation, making content repurposing effortless.",
+    videoUrl: "https://www.youtube.com/embed/R6lDj3K2BvI?si=8B6-q_BwKkyDD4bS",
+    techStack: [
+      "Python",
+      "Flask",
+      "OpenAI API",
+
+      "NextJS",
+      "TypeScript",
+      "REST APIs",
+    ],
+    imagePosition: "center",
+  },
 ];
 
 const WorkProduct = () => {
