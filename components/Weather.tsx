@@ -28,20 +28,32 @@ const Weather: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+
     const fetchWeather = async () => {
+      if (weather) return;
+
       try {
         const response = await fetch("/api/weather");
         if (!response.ok) throw new Error("Failed to fetch weather data");
         const data = await response.json();
-        setWeather(data);
+        if (isMounted) {
+          setWeather(data);
+        }
       } catch (err) {
         console.error("Error fetching weather:", err);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchWeather();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const getWeatherIcon = (weatherText: string) => {
