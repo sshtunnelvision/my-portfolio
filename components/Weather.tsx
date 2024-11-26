@@ -34,7 +34,13 @@ const Weather: React.FC = () => {
       if (weather) return;
 
       try {
-        const response = await fetch("/api/weather");
+        const response = await fetch("/api/weather", {
+          cache: "no-store",
+          headers: {
+            Pragma: "no-cache",
+            "Cache-Control": "no-cache",
+          },
+        });
         if (!response.ok) throw new Error("Failed to fetch weather data");
         const data = await response.json();
         if (isMounted) {
