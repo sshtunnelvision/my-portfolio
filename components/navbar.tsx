@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Weather from "./Weather";
 import { FaBars, FaTimes } from "react-icons/fa";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -105,7 +106,9 @@ const Navbar = () => {
                 scrollOpacity > 0 ? "pr-4" : "pr-0"
               }`}
             >
-              <Weather />
+              <div className="relative flex items-center">
+                <Weather />
+              </div>
             </div>
           </nav>
         </div>

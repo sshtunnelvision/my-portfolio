@@ -9,6 +9,7 @@ import {
   FaSnowflake,
   FaMapMarkerAlt,
 } from "react-icons/fa";
+import Image from "next/image";
 
 interface WeatherData {
   locationKey: string;
@@ -77,8 +78,14 @@ const Weather: React.FC = () => {
     return <FaSun className="text-yellow-400" />;
   };
 
-  if (loading || !weather)
-    return <div className="text-gray-300 text-xs sm:text-sm">Loading...</div>;
+  if (loading || !weather) {
+    return (
+      <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-300">
+        <FaMapMarkerAlt className="text-gray-300" />
+        <span className="font-medium text-[10px] sm:text-sm">NYC</span>
+      </div>
+    );
+  }
 
   const { WeatherText, Temperature } = weather.currentConditions;
 
