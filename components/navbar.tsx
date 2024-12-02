@@ -15,19 +15,29 @@ const Navbar = () => {
   const router = useRouter();
   const [scrollOpacity, setScrollOpacity] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
       const scrollTop = window.pageYOffset;
-      const opacity = Math.min(scrollTop / 100, 0.7); // Reduced max opacity for more transparency
+      const opacity = Math.min(scrollTop / 100, 0.7);
+
+      // Show/hide based on scroll direction
+      if (currentScrollY > lastScrollY) {
+        setIsVisible(false); // Scrolling down
+      } else {
+        setIsVisible(true); // Scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
       setScrollOpacity(opacity);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   const handleNavigation = (href: string) => {
     if (href.startsWith("/#")) {
@@ -42,7 +52,11 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 pt-8">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 pt-8 transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
         <div
           className={`relative rounded-xl my-2 transition-all duration-300 ${

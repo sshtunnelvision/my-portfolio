@@ -92,7 +92,7 @@ const WorkProduct = () => {
     <div className="flex-grow flex flex-col items-start justify-center w-full pt-4 opacity-0 animate-fade-in-up [animation-delay:600ms]">
       <h1 className="text-lg mb-2">Projects</h1>
       <div className="w-full h-px bg-zinc-700 mb-4"></div>
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-8 sm:px-0">
         {projects.map((project, index) => (
           <Dialog
             key={index}
@@ -101,7 +101,7 @@ const WorkProduct = () => {
           >
             <DialogTrigger asChild>
               <div
-                className="cursor-pointer"
+                className="cursor-pointer max-w-[85%] sm:max-w-full mx-auto w-full"
                 onClick={() => {
                   if (project.externalLink) {
                     window.open(project.externalLink, "_blank");
