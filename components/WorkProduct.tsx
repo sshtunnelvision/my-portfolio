@@ -101,7 +101,7 @@ const WorkProduct = () => {
           >
             <DialogTrigger asChild>
               <div
-                className="cursor-pointer max-w-[85%] sm:max-w-full mx-auto w-full"
+                className="cursor-pointer max-w-[98%] sm:max-w-full mx-auto w-full"
                 onClick={() => {
                   if (project.externalLink) {
                     window.open(project.externalLink, "_blank");
