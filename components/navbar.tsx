@@ -24,8 +24,10 @@ const Navbar = () => {
       const scrollTop = window.pageYOffset;
       const opacity = Math.min(scrollTop / 100, 0.7);
 
-      // Show/hide based on scroll direction
-      if (currentScrollY > lastScrollY) {
+      // Always show navbar at top of page
+      if (currentScrollY <= 0) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY) {
         setIsVisible(false); // Scrolling down
       } else {
         setIsVisible(true); // Scrolling up
