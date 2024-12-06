@@ -4,7 +4,25 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import { WobbleCard } from "@/components/ui/wobble-card";
-import { SquareArrowOutUpRight } from "lucide-react";
+import { SquareArrowOutUpRight, ExternalLink } from "lucide-react";
+
+const featuredProject = {
+  title: "AI Document Generation",
+  image: "/smrtfeed1.png",
+  description: `Empowering job seekers with AI-powered document drafting. Smrtfeed combines advanced AI with intuitive document editing to streamline the job application process. The platform automatically generates tailored cover letters and optimizes resumes based on job descriptions, while providing a powerful in-line text editor for fine-tuning. Built with modern web technologies and featuring custom web scraping capabilities, Smrtfeed aims to create the most efficient document drafting experience available.`,
+  videoUrl: "https://www.youtube.com/embed/C4C2dP231Z0",
+  techStack: [
+    "NextJS",
+    "Typescript",
+    "Supabase",
+    "Prisma ORM",
+    "TipTap",
+    "OpenAI",
+    "Firecrawl API",
+    "Tailwind CSS",
+  ],
+  imagePosition: "center",
+};
 
 const projects = [
   {
@@ -13,7 +31,6 @@ const projects = [
     description:
       "The Smrtfeed editor seamlessly integrates AI into your writing process, offering real-time suggestions and improvements as you type, while still giving you full control over your document down to each character. It enhances productivity and writing quality by providing context-aware assistance directly within your document. Smrtfeed also has the ability to generate images from text, and can be used to generate images for your documents.",
     videoUrls: [
-      "https://www.youtube.com/embed/s-7Y1WTh8ps",
       "https://www.youtube.com/embed/5XyEKVpZjLo?si=NLJALZ90Rq1oYdlZ",
     ],
     techStack: ["NextJS", "Typescript", "React", "TipTap", "REST APIs"],
@@ -55,17 +72,6 @@ const projects = [
     imagePosition: "center",
   },
   {
-    title: "Flmdrive LoRA",
-    image: "/flmdrive-1.jpeg",
-    description:
-      "A custom LoRA (Low-Rank Adaptation) model trained on film photography aesthetics. This project showcases the ability to create AI-generated images that capture the unique characteristics and mood of film photography.",
-    techStack: [""],
-    imagePosition: "center",
-    externalLink:
-      "https://www.figma.com/board/6iVNRLCdXudIzWbrhQAkHP/Loras?node-id=0-1&t=G1HrZoH2H1Q9zfPR-1",
-    linkType: "figma",
-  },
-  {
     title: "YouTube To Content Generation",
     image: "/youtube-logo.png",
     description:
@@ -82,6 +88,17 @@ const projects = [
     ],
     imagePosition: "center",
   },
+  {
+    title: "Flmdrive LoRA",
+    image: "/flmdrive-1.jpeg",
+    description:
+      "A custom LoRA (Low-Rank Adaptation) model trained on film photography aesthetics. This project showcases the ability to create AI-generated images that capture the unique characteristics and mood of film photography.",
+    techStack: [""],
+    imagePosition: "center",
+    externalLink:
+      "https://www.figma.com/board/6iVNRLCdXudIzWbrhQAkHP/Loras?node-id=0-1&t=G1HrZoH2H1Q9zfPR-1",
+    linkType: "figma",
+  },
 ];
 
 const WorkProduct = () => {
@@ -90,9 +107,74 @@ const WorkProduct = () => {
 
   return (
     <div className="flex-grow flex flex-col items-start justify-center w-full pt-4 opacity-0 animate-fade-in-up [animation-delay:600ms]">
-      <h1 className="text-lg mb-2">Projects</h1>
-      <div className="w-full h-px bg-zinc-700 mb-4"></div>
+      <h1 className="text-lg mb-4">Projects</h1>
+
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-8 sm:px-0">
+        <Dialog>
+          <DialogTrigger asChild>
+            <div className="cursor-pointer max-w-[98%] sm:max-w-full mx-auto w-full">
+              <WobbleCard
+                containerClassName="border-2 border-cyan-400 overflow-hidden transition-colors duration-300 hover:border-white"
+                className="p-0 relative aspect-square"
+              >
+                <Image
+                  src={featuredProject.image}
+                  alt={featuredProject.title}
+                  fill
+                  className="object-cover object-position-center z-0"
+                  style={{ objectPosition: featuredProject.imagePosition }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/70 to-zinc-800/70 backdrop-blur-[2px] flex flex-col justify-between text-white z-10">
+                  <div className="absolute inset-0 flex flex-col justify-center items-center p-6">
+                    <h2 className="text-lg font-bold text-center leading-tight">
+                      {featuredProject.title}
+                    </h2>
+                  </div>
+                </div>
+                <div className="absolute bottom-2 right-2 z-20 flex items-center gap-1">
+                  <span className="text-[10px] text-cyan-400">View Demo</span>
+                  <SquareArrowOutUpRight className="w-4 h-4 text-cyan-400" />
+                </div>
+              </WobbleCard>
+            </div>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[725px] bg-zinc-900 border-2 border-white max-h-[90vh] overflow-y-auto">
+            <div className="aspect-video w-full">
+              <iframe
+                className="w-full h-full"
+                src={featuredProject.videoUrl}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <p className="mt-4 text-sm text-zinc-300">
+              {featuredProject.description}
+            </p>
+            <a
+              href="https://smrtfeed.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-cyan-500/20 hover:bg-cyan-500/30 rounded-md transition-colors duration-200 mt-4 w-fit"
+            >
+              <span className="text-sm">Visit Website</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {featuredProject.techStack.map((tech, i) => (
+                <span
+                  key={i}
+                  className="text-xs bg-cyan-500/20 px-2 py-1 rounded-full"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
+
         {projects.map((project, index) => (
           <Dialog
             key={index}
