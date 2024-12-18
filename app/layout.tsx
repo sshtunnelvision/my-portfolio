@@ -16,6 +16,9 @@ const ubuntuMono = Ubuntu_Mono({
 export const metadata: Metadata = {
   title: "Arek Halpern's Portfolio",
   description: "Arek Halpern's Portfolio",
+  verification: {
+    google: "zZW3AYbMgAAzcSfTU-CZEBHorAoewlhVGwFEb9q_cdk",
+  },
   icons: {
     icon: [
       {
