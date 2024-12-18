@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { Ubuntu_Mono } from "next/font/google";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const ubuntuMono = Ubuntu_Mono({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default function RootLayout({
           "before:content-[''] before:fixed before:inset-0 before:bg-zinc-900/60"
         )}
       >
+        <GoogleAnalytics />
         <Navbar />
         <main className="flex-grow flex flex-col max-w-4xl mx-auto w-full px-3 sm:px-4 lg:px-6 pt-32 relative">
           {children}
