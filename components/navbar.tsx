@@ -5,13 +5,18 @@ import { usePathname, useRouter } from "next/navigation";
 import Weather from "./Weather";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/contact", label: "Contact" },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  className?: string;
+}
+
+const Navbar = ({ className }: NavbarProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [scrollOpacity, setScrollOpacity] = useState(0);
@@ -56,9 +61,12 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 pt-8 transition-transform duration-300 ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      }`}
+      className={cn(
+        `fixed top-0 left-0 right-0 z-50 pt-8 transition-transform duration-300 ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`,
+        className
+      )}
     >
       <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-6">
         <div

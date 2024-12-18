@@ -4,6 +4,7 @@ import Navbar from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { Ubuntu_Mono } from "next/font/google";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Footer from "@/components/Footer";
 
 const ubuntuMono = Ubuntu_Mono({
   subsets: ["latin"],
@@ -46,16 +47,19 @@ export default function RootLayout({
     <html lang="en" className={`${ubuntuMono.variable} bg-zinc-900`}>
       <body
         className={cn(
-          "min-h-screen antialiased text-zinc-100 flex flex-col font-chivo",
+          "min-h-screen antialiased text-zinc-100 flex flex-col font-chivo relative",
           "bg-[url('/bg-gradient.png')] bg-cover bg-fixed bg-no-repeat w-screen",
-          "before:content-[''] before:fixed before:inset-0 before:bg-zinc-900/60"
+          "before:content-[''] before:fixed before:inset-0 before:bg-zinc-900/60 before:z-[1]"
         )}
       >
-        <GoogleAnalytics />
-        <Navbar />
-        <main className="flex-grow flex flex-col max-w-4xl mx-auto w-full px-3 sm:px-4 lg:px-6 pt-32 relative">
-          {children}
-        </main>
+        <div className="relative z-[2] flex flex-col min-h-screen">
+          <GoogleAnalytics />
+          <Navbar />
+          <main className="flex-grow flex flex-col max-w-4xl mx-auto w-full px-3 sm:px-4 lg:px-6 pt-32">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
