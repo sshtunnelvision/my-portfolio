@@ -11,103 +11,40 @@ import { Fragment } from "react";
 const blogPosts = {
   "will-agents-eat-apps": {
     title: "Will Agents Eat Apps?",
-    description:
-      "Thoughts on AI agent to agent user experience and the potential end of applications as we know it.",
+    description: "",
     date: "2024-12-21",
     author: "Arek",
     tags: ["AI", "Agents", "SaaS", "UX"],
     content: `
       <div class="prose prose-invert prose-zinc max-w-none">
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">The Future of SaaS UX</h2>
-        <p class="mb-6">A paradigm shift is underway where AI agents could become the primary interface between users and services, fundamentally changing how we interact with applications. Unlike traditional apps requiring direct user interaction, this new model positions AI agents as intelligent intermediaries.</p>
-
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">The Agent Architecture</h2>
-        <p class="mb-4">Looking at the architectural diagram, we can see how an agent-based system functions. The AI agent serves as the central hub for all interactions, with access to various tools (calendars, calculators, search functions), memory systems, and planning capabilities. This architecture enables sophisticated decision-making and task execution without direct user intervention.</p>
-        
         <div class="relative w-full aspect-[16/9] mb-12">
           <div data-image="agent-architecture"></div>
         </div>
 
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">How It Works: A Practical Example</h2>
-        <p class="mb-6">When a user interacts with an agent-based system, every input - whether voice, text, or even gestures - first passes through the agent. This creates a single, consistent entry point for all user interactions. Here's how the flow typically works:</p>
+        <p class="mb-6">Replace tools from the image with specific functions your app has - the function to buy a product on your app, the function to get data from your app, etc... </p>
 
-        <h3 class="text-xl font-semibold mt-6 mb-3 text-white">Input Flow:</h3>
-        <p class="mb-4">You make a request (e.g., "Show me my calendar for next week and add any free slots to my shopping list")</p>
+        <p class="mb-6">Imagine all user interactions flow through the agent - whether they're uploading files, requesting visualizations, or needing data analysis. The agent then orchestrates these functions and returns both computational results and UI components back to the user.</p>
 
-        <p class="mb-4">The agent processes this input through several stages:</p>
+        <p class="mb-6">Now imagine it more like agent-to-agent communication - think Apple's Siri chatting with Amazon's agent:</p>
+
+        <div class="mb-6">
+          <p>"Hey Siri, grab me some toilet paper from Amazon"</p>
+          <p>Siri -> Amazon's Agent: "Need to order toilet paper for my user"</p>
+          <p>Amazon's Agent -> Siri: "Order confirmed, arriving Tuesday"</p>
+          <p>Siri -> You: "Got your toilet paper ordered, it'll be here Tuesday"</p>
+        </div>
+
+        <p class="mb-6">The key thing is you never touch the Amazon app directly. Need a visual of your cart because audio feedback isn't cutting it? Just go: "Hey Siri, show me my Amazon cart" And Siri pings Amazon's agent, which generates and sends back the UI that Siri then displays on your phone. The Amazon app becomes obsolete for direct user interaction. This might be where software as a service UX is heading, though it's definitely debatable if this'll be the dominant paradigm. I think it will coexist with apps for a while but not long after, take over as the go-to user experience.</p>
+
+        <p class="mb-6">To future-proof your app in this ecosystem, you need two things:</p>
         <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>Natural language understanding to parse the intent</li>
-          <li>Memory access to check context from previous interactions</li>
-          <li>Planning to break down complex requests into subtasks</li>
+          <li>Your core IP/data/endpoints locked down tight</li>
+          <li>Everything connects to your agent</li>
         </ul>
 
-        <p class="mb-4">The agent then coordinates with the appropriate tools:</p>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>Queries the Calendar() function for next week's schedule</li>
-          <li>Uses Memory to access your shopping habits and preferences</li>
-          <li>Employs Search() to find relevant information if needed</li>
-        </ul>
+        <p class="mb-6">The really interesting question is how this gets distributed. Maybe users download your agent directly (like apps today), or maybe Apple creates an "Agent Store" where your agent lives in their cloud and users just permission it. The implementation details aren't as important as ensuring your agent is the sole interface to your app's core functionality.</p>
 
-        <h3 class="text-xl font-semibold mt-6 mb-3 text-white">Output Flow:</h3>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>The agent collects responses from various tools and functions</li>
-          <li>It synthesizes this information through its planning module</li>
-        </ul>
-
-        <p class="mb-4">Before presenting to the user, the agent:</p>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>Formats the response appropriately (text, UI elements, voice)</li>
-          <li>Checks for completeness through self-critics</li>
-          <li>Uses reflection to ensure the response matches the original intent</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">Agent-to-Agent Communication & Development</h2>
-        <p class="mb-4">For businesses and developers, this shift requires a new approach:</p>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>Building APIs accessible only through authenticated agents</li>
-          <li>Creating agents that effectively communicate with other agents</li>
-          <li>Implementing secure data endpoints while enabling seamless interactions</li>
-          <li>Designing flexible UI generation systems for when visual interaction is necessary</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">The Gray Areas: Unauthorized Agents</h2>
-        <p class="mb-6">Not all companies will participate willingly in this ecosystem. This gap will likely spawn unauthorized agents that scrape websites and automate actions – essentially sophisticated RPA (Robotic Process Automation) tools. While more accessible than traditional RPA, these practices will likely violate terms of service and face legal challenges.</p>
-
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">Current Agent Building Tools</h2>
-        <p class="mb-4">Several platforms and tools are already emerging to support agent development:</p>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>AI16z - Eliza: An open-source framework for building conversational agents with sophisticated reasoning capabilities.</li>
-          <li>GPTs by OpenAI: A platform for creating custom agents with specific capabilities and knowledge domains.</li>
-          <li>ZerePy: A Python framework focusing on agent-to-agent communication protocols.</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">The Business Model Challenge</h2>
-        <p class="mb-4">Companies embracing agent-to-agent interactions will likely implement new revenue models:</p>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>Premium API access fees for agent interactions</li>
-          <li>Compensation structures for lost advertising revenue</li>
-          <li>Tiered pricing based on automation levels and usage patterns</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">Security and Trust Considerations</h2>
-        <p class="mb-4">The shift to agent-based interfaces raises important questions:</p>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>How will user data remain secure across agent interactions?</li>
-          <li>What authentication standards will emerge for agent-to-agent communication?</li>
-          <li>How will users maintain control over their agent's actions?</li>
-          <li>What mechanisms will prevent unauthorized agent access?</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold mt-8 mb-4 text-white">Looking Ahead</h2>
-        <p class="mb-4">While this vision is compelling, the transition won't be immediate. Companies need to:</p>
-        <ul class="list-disc pl-6 mb-6 space-y-2">
-          <li>Develop robust agent interfaces</li>
-          <li>Establish secure communication protocols</li>
-          <li>Create clear pricing models</li>
-          <li>Build trust with users</li>
-        </ul>
-
-        <p class="mb-6">The success of this model will ultimately depend on finding the right balance between convenience, security, and business interests. As AI capabilities advance, we might find ourselves in a world where direct app manipulation becomes increasingly rare, replaced by intelligent agents managing our digital interactions.</p>
+        <p class="mb-6">This agent-mediated architecture preserves your IP while enabling seamless integration into an agent-centric computing future. The user never needs to learn your specific UI patterns or workflows - they just chat with their preferred agent, which knows how to coordinate with your agent to get things done.</p>
       </div>
     `,
   },
