@@ -9,7 +9,6 @@ import {
   FaSnowflake,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import Image from "next/image";
 
 interface WeatherData {
   locationKey: string;
@@ -32,8 +31,6 @@ const Weather: React.FC = () => {
     let isMounted = true;
 
     const fetchWeather = async () => {
-      if (weather) return;
-
       try {
         const response = await fetch("/api/weather", {
           cache: "no-store",
