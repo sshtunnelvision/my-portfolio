@@ -50,12 +50,12 @@ export default function RootLayout({
     <html lang="en" className={`${ubuntuMono.variable} bg-zinc-900`}>
       <body
         className={cn(
-          "min-h-screen antialiased text-zinc-100 flex flex-col font-chivo"
+          "antialiased text-zinc-100 font-chivo min-h-screen relative"
         )}
       >
-        <div className="relative flex flex-col min-h-screen">
-          <GoogleAnalytics />
-          <Navbar />
+        <GoogleAnalytics />
+        <Navbar />
+        <div className="flex flex-col min-h-screen">
           <main className="flex-grow flex flex-col max-w-4xl mx-auto w-full px-3 sm:px-4 lg:px-6 pt-32">
             {children}
           </main>

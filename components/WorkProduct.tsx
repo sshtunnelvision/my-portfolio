@@ -141,6 +141,8 @@ const WorkProduct = () => {
                     src={project.image}
                     alt={project.title}
                     fill
+                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
+                    priority={index === 0}
                     className="object-cover object-position-center z-0"
                     style={{
                       objectPosition: project.imagePosition || "center",

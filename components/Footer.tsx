@@ -9,7 +9,7 @@ interface FooterProps {
 
 export default function Footer({ className }: FooterProps) {
   return (
-    <footer className={cn("w-full mt-auto py-6 px-4", className)}>
+    <footer className={cn("w-full mt-auto py-6 px-4 relative z-20", className)}>
       <div className="max-w-4xl mx-auto flex justify-center">
         <div className="flex items-center space-x-4">
           <a

@@ -4,12 +4,11 @@ import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Weather from "./Weather";
 import { FaBars, FaTimes } from "react-icons/fa";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/contact", label: "Contact" },
+  { href: "/blog", label: "Blog" },
 ];
 
 interface NavbarProps {
