@@ -21,7 +21,7 @@ const blogPosts = {
           <div data-image="agent-architecture"></div>
         </div>
 
-        <p class="mb-6">Replace tools from the image with specific functions your app has - the function to buy a product on your app, the function to get data from your app, etc... </p>
+        <p class="mb-6">Imagine an agent can action on specific functions that an app has - the function to buy a product on an app, the function to get data from an app, etc...</p>
 
         <p class="mb-6">Imagine all user interactions flow through the agent - whether they're uploading files, requesting visualizations, or needing data analysis. The agent then orchestrates these functions and returns both computational results and UI components back to the user.</p>
 
