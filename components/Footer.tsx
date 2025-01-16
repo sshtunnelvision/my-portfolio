@@ -28,7 +28,7 @@ export default function Footer({ className }: FooterProps) {
           >
             <FaLinkedin size={20} />
           </a>
-          <a
+          {/* <a
             href="https://twitter.com/arek10000"
             target="_blank"
             rel="noopener noreferrer"
@@ -36,7 +36,7 @@ export default function Footer({ className }: FooterProps) {
             aria-label="Arek Halpern on Twitter"
           >
             <FaTwitter size={20} />
-          </a>
+          </a> */}
           <a
             href="https://github.com/arekhalpern"
             target="_blank"
