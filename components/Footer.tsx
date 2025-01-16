@@ -28,15 +28,7 @@ export default function Footer({ className }: FooterProps) {
           >
             <FaLinkedin size={20} />
           </a>
-          {/* <a
-            href="https://twitter.com/arek10000"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-100 hover:text-cyan-400 transition-colors"
-            aria-label="Arek Halpern on Twitter"
-          >
-            <FaTwitter size={20} />
-          </a> */}
+
           <a
             href="https://github.com/arekhalpern"
             target="_blank"
