@@ -37,13 +37,10 @@ const blogPosts = [
 export default function BlogPage() {
   return (
     <div className="relative min-h-screen">
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[url('/bg-gradient.png')] bg-cover bg-fixed bg-no-repeat" />
-        <div className="absolute inset-0 bg-zinc-900/60" />
-      </div>
+      <div className="fixed inset-0 -z-10"></div>
       <div className="fixed inset-0 -z-5">
         <PixelTrail
-          pixelSize={20}
+          pixelSize={10}
           delay={100}
           fadeDuration={400}
           pixelClassName="bg-yellow-300"
@@ -65,10 +62,10 @@ export default function BlogPage() {
                 key={post.slug}
                 className="flex justify-between items-center py-3 hover:bg-zinc-900/20 transition-colors duration-200 -mx-4 px-4 rounded-lg group"
               >
-                <h2 className="text-xl font-semibold text-white group-hover:text-cyan-400 transition-colors mix-blend-difference">
+                <h2 className="text-xl font-semibold text-white group-hover:text-yellow-300 transition-colors mix-blend-difference">
                   {post.title}
                 </h2>
-                <span className="text-sm text-zinc-400 mix-blend-difference">
+                <span className="text-sm text-zinc-300 mix-blend-difference">
                   {new Date(post.date).toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",

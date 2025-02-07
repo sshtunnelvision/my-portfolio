@@ -14,7 +14,7 @@ export default function Footer({ className }: FooterProps) {
         <div className="flex items-center space-x-4">
           <a
             href="mailto:arek.halpern@gmail.com"
-            className="text-zinc-100 hover:text-cyan-400 transition-colors"
+            className="text-zinc-300 hover:text-cyan-400 transition-colors"
             aria-label="Email Arek Halpern"
           >
             <FaEnvelope size={20} />
@@ -23,7 +23,7 @@ export default function Footer({ className }: FooterProps) {
             href="https://www.linkedin.com/in/arekhalpern/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-100 hover:text-cyan-400 transition-colors"
+            className="text-zinc-300 hover:text-cyan-400 transition-colors"
             aria-label="Arek Halpern on LinkedIn"
           >
             <FaLinkedin size={20} />
@@ -33,7 +33,7 @@ export default function Footer({ className }: FooterProps) {
             href="https://github.com/arekhalpern"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-100 hover:text-cyan-400 transition-colors"
+            className="text-zinc-300 hover:text-cyan-400 transition-colors"
             aria-label="Arek Halpern on GitHub"
           >
             <FaGithub size={20} />
@@ -42,7 +42,7 @@ export default function Footer({ className }: FooterProps) {
             href="https://huggingface.co/Arek10000"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-100 hover:text-cyan-400 transition-colors"
+            className="text-zinc-300 hover:text-cyan-400 transition-colors"
             aria-label="Arek Halpern on Hugging Face"
           >
             <SiHuggingface size={20} />

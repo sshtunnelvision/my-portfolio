@@ -50,7 +50,7 @@ export default function RootLayout({
     <html lang="en" className={`${ubuntuMono.variable} bg-zinc-900`}>
       <body
         className={cn(
-          "antialiased text-zinc-100 font-chivo min-h-screen relative"
+          "antialiased text-zinc-300 font-chivo min-h-screen relative"
         )}
       >
         <GoogleAnalytics />

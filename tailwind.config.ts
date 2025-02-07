@@ -12,6 +12,7 @@ const config: Config = {
         chivo: ["var(--font-chivo)"],
         "work-sans": ["var(--font-work-sans)"],
         "ubuntu-mono": ["var(--font-ubuntu-mono)"],
+        roboto: ['var(--font-roboto)'],
       },
       keyframes: {
         wave: {

@@ -18,7 +18,7 @@ const Header = () => {
       </p>
       <div className="absolute inset-0">
         <PixelTrail
-          pixelSize={20}
+          pixelSize={10}
           delay={100}
           fadeDuration={400}
           pixelClassName="bg-yellow-300"

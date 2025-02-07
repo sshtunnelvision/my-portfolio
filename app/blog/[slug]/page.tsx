@@ -102,13 +102,10 @@ export default function BlogPost({ params }: Props) {
 
   return (
     <div className="relative min-h-screen">
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[url('/bg-gradient.png')] bg-cover bg-fixed bg-no-repeat" />
-        <div className="absolute inset-0 bg-zinc-900/60" />
-      </div>
+      <div className="fixed inset-0 -z-10"></div>
       <div className="fixed inset-0 -z-5">
         <PixelTrail
-          pixelSize={20}
+          pixelSize={10}
           delay={100}
           fadeDuration={400}
           pixelClassName="bg-yellow-300"
@@ -122,11 +119,11 @@ export default function BlogPost({ params }: Props) {
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-sm mb-6">
               <div className="flex items-center gap-4">
-                <div className="flex items-center text-zinc-400 mix-blend-difference">
+                <div className="flex items-center text-zinc-300 mix-blend-difference">
                   <User className="mr-2 h-4 w-4" />
                   <span>{post.author}</span>
                 </div>
-                <div className="flex items-center text-zinc-400 mix-blend-difference">
+                <div className="flex items-center text-zinc-300 mix-blend-difference">
                   <CalendarDays className="mr-2 h-4 w-4" />
                   {new Date(post.date).toLocaleDateString("en-US", {
                     year: "numeric",
@@ -149,7 +146,7 @@ export default function BlogPost({ params }: Props) {
             </p>
           </header>
           <div
-            className="text-zinc-200 mix-blend-difference"
+            className="text-zinc-300 mix-blend-difference"
             dangerouslySetInnerHTML={{ __html: contentWithImage }}
           />
         </article>
