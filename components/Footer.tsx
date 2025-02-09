@@ -30,7 +30,7 @@ export default function Footer({ className }: FooterProps) {
           </a>
 
           <a
-            href="https://github.com/arekhalpern"
+            href="https://github.com/sshtunnelvision"
             target="_blank"
             rel="noopener noreferrer"
             className="text-zinc-300 hover:text-cyan-400 transition-colors"
