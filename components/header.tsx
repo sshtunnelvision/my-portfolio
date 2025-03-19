@@ -7,10 +7,10 @@ const Header = () => {
   return (
     <div className="mb-8 relative">
       <h1 className="text-xl font-bold mb-2 flex items-center opacity-0 animate-fade-in-up [animation-delay:200ms] mix-blend-difference">
-        Hi, I&apos;m Arek Halpern{" "}
+        Hi, I&apos;m Arek{" "}
         <FaHandPaper className="inline-block ml-2 animate-wave" />
       </h1>
-      <p className="text-lg text-zinc-300 max-w-3xl opacity-0 animate-fade-in-up [animation-delay:400ms] mix-blend-difference">
+      <p className="text-lg max-w-3xl opacity-0 animate-fade-in-up [animation-delay:400ms] mix-blend-difference">
         I love to build software with an emphasis on{" "}
         <br className="hidden sm:inline" />
         <span className="text-cyan-400">marketing strategy</span> and{" "}
@@ -21,7 +21,7 @@ const Header = () => {
           pixelSize={10}
           delay={100}
           fadeDuration={400}
-          pixelClassName="bg-yellow-300"
+          pixelClassName="bg-orange-300"
         />
       </div>
     </div>

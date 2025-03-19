@@ -85,7 +85,7 @@ const Navbar = ({ className }: NavbarProps) => {
             <div className="flex items-center">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-zinc-300 hover:text-white px-4 sm:hidden focus:outline-none focus:ring-0"
+                className=" hover:text-white px-4 sm:hidden focus:outline-none focus:ring-0"
               >
                 {isMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
               </button>
@@ -98,7 +98,7 @@ const Navbar = ({ className }: NavbarProps) => {
                   <li key={href}>
                     <button
                       onClick={() => handleNavigation(href)}
-                      className={`px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-0 ${
+                      className={`px-4 py-2 text-sm font-medium  hover:text-white transition-colors duration-200 focus:outline-none focus:ring-0 ${
                         index === 0 ? "rounded-l-xl" : ""
                       }`}
                     >
