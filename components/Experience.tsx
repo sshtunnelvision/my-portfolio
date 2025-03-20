@@ -6,43 +6,12 @@ import { Calendar, MapPin, Building } from "lucide-react";
 
 const experiences = [
   {
-    title: "Senior Frontend Engineer",
-    company: "Tech Solutions Inc.",
-    location: "San Francisco, CA",
-    period: "2021 - Present",
-    description: [
-      "Led the development of a customer-facing dashboard using React, TypeScript, and Next.js.",
-      "Implemented robust state management with Redux and optimized performance.",
-      "Collaborated with UX designers to create intuitive and accessible interfaces.",
-      "Mentored junior developers and conducted code reviews to maintain code quality.",
-    ],
-    skills: ["React", "TypeScript", "Next.js", "Redux", "TailwindCSS"],
-  },
-  {
-    title: "Frontend Developer",
-    company: "Digital Innovations",
-    location: "Seattle, WA",
-    period: "2019 - 2021",
-    description: [
-      "Developed responsive web applications using modern JavaScript frameworks.",
-      "Built reusable component libraries and implemented design systems.",
-      "Integrated RESTful APIs and optimized front-end performance.",
-      "Participated in agile development processes and sprint planning.",
-    ],
-    skills: ["JavaScript", "React", "CSS3", "HTML5", "REST APIs"],
-  },
-  {
-    title: "Web Developer",
-    company: "Creative Agency",
-    location: "Portland, OR",
-    period: "2017 - 2019",
-    description: [
-      "Created custom websites for clients across various industries.",
-      "Implemented responsive designs and ensured cross-browser compatibility.",
-      "Collaborated with designers to translate mockups into functional websites.",
-      "Maintained client websites and implemented SEO best practices.",
-    ],
-    skills: ["HTML", "CSS", "JavaScript", "WordPress", "PHP"],
+    title: "",
+    company: "",
+    location: "",
+    period: "",
+    description: [""],
+    skills: [""],
   },
 ];
 
